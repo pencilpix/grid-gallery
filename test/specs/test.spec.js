@@ -36,5 +36,9 @@ describe('GridGallery', function(){
     it('should extend the default options and icludes the new one', function() {
       expect(x.options).to.have.property('lightBox', true);
     });
+
+    it('should store the container as a property', function() {
+      expect(x).to.have.property('_element', container);
+    });
   });
 });
