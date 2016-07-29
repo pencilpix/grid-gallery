@@ -8,17 +8,31 @@
 
 describe('GridGallery', function(){
   describe('GridGallery initialization', function(){
+    var x, options = { lightBox: true };
+
+    before(function() {
+      var container = document.createElement('div');
+      var element = document.createElement('div');
+
+      container.className = 'grid-gallery';
+      element.className = 'grid-gallery__item';
+
+      for (var i = 0; i < 5; i++) {
+        container.appendChild(element);
+      }
+
+      x = new GridGallery(document.createElement('div'), options);
+    });
+
     it('Global must have the GridGallery as a property', function() {
      expect(window.GridGallery).to.not.equal(undefined);
     });
 
     it('should manipulate the default options to the created instance', function() {
-      var x = new GridGallery();
       expect(x).to.have.property('options');
     });
 
     it('should extend the default options and icludes the new one', function() {
-      var x = new GridGallery(document.createElement('div'), {lightBox: true});
       expect(x.options).to.have.property('lightBox', true);
     });
   });
