@@ -42,7 +42,9 @@
     var _defaultOptions = { lightBox: false };
 
     this._element = element;
-    this.options = _extend({}, _defaultOptions);
+
+    this.options = _extend({}, _defaultOptions); // extend options to default
+    this.options = _extend(this.options, options); // extend default to custom
   }
 
   window.GridGallery = GridGallery; // makes the component globally exist.
