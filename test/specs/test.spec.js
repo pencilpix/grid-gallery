@@ -6,8 +6,10 @@
  * 4- nav of items in grid (disable/enable) depending on initialization
  */
 
-describe('test', function(){
- it('should be true', function() {
-   expect(true).to.equal(true);
- });
+describe('GridGallery', function(){
+  describe('GridGallery initialization', function(){
+    it('Global must have the GridGallery as a property', function() {
+     expect(window.GridGallery).to.equal(true);
+    });
+  });
 });
