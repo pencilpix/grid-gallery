@@ -25,7 +25,7 @@ describe('GridGallery', function(){
     });
 
     it('Global must have the GridGallery as a property', function() {
-     expect(window.GridGallery).to.not.equal(undefined);
+     expect(GridGallery).to.not.equal(undefined);
     });
 
     it('should manipulate the default options to the created instance', function() {
