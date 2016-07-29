@@ -39,7 +39,10 @@
    * @param { Object } options The options to initialize the component.
    */
   function GridGallery(element, options) {
+    var _defaultOptions = { lightBox: false };
+
     this._element = element;
+    this.options = _extend({}, _defaultOptions);
   }
 
   window.GridGallery = GridGallery; // makes the component globally exist.
