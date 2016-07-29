@@ -8,4 +8,18 @@
  * Author: Mohamed Hassan
  * Author Url: mohamedhassan@me
  */
+(function($doc, $win){
+  'use strict';
+
+  /*
+   * class constructor of GridGallery component
+   * @param { HTMLElement } element The element that will be the container.
+   * @param { Object } options The options to initialize the component.
+   */
+  function GridGallery(element, options) {
+    this._element = element;
+  }
+
+  window.GridGallery = GridGallery; // makes the component globally exist.
+})(document, window);
 
