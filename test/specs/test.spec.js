@@ -29,7 +29,8 @@ describe('GridGallery', function(){
     });
 
     it('should manipulate the default options to the created instance', function() {
-      expect(x).to.have.property('options');
+      var y = new GridGallery();
+      expect(y.options).to.have.property('lightBox', false);
     });
 
     it('should extend the default options and icludes the new one', function() {
