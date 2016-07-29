@@ -11,6 +11,28 @@
 (function($doc, $win){
   'use strict';
 
+  /*=========================
+   * @private helper functions
+   *========================/
+
+   /*
+    * _extend Private method that extends an object using
+    * properties of another object.
+    * @param { Object } obj1 The object that will be extended
+    * @param { Object } obj2 The object that will be used to extend another.
+    *
+    * @return { Object } obj1 The first object after being extended.
+    */
+  function _extend(obj1, obj2) {
+    for ( var prop in obj2 ) {
+      if ( obj2.hasOwnProperty(prop) ) {
+        obj1[prop] = obj2[prop];
+      }
+    }
+
+    return obj1;
+  }
+
   /*
    * class constructor of GridGallery component
    * @param { HTMLElement } element The element that will be the container.
