@@ -88,8 +88,8 @@ gulp.task('test', () => {
       });
 })
 
-gulp.task('watch:test', function(){
-  gulp.watch(['src/assets/js/**/*.js', 'test/specs/**/*.js'], ['lint:test', 'test'])
+gulp.task('watch:test', ['lint:test'], function(){
+  gulp.watch(['src/assets/js/**/*.js', 'test/specs/**/*.js'], ['test'])
 })
 
 gulp.task('serve', ['styles', 'scripts'], () => {
