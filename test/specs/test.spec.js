@@ -9,19 +9,19 @@
 describe('GridGallery', function(){
   describe('GridGallery initialization', function(){
     var x, options = { lightBox: true };
+    var container;
 
     before(function() {
-      var container = document.createElement('div');
-      var element = document.createElement('div');
-
+      container = document.createElement('div');
       container.className = 'grid-gallery';
-      element.className = 'grid-gallery__item';
 
       for (var i = 0; i < 5; i++) {
+        var element = document.createElement('div');
+        element.className = 'grid-gallery__item';
         container.appendChild(element);
       }
 
-      x = new GridGallery(document.createElement('div'), options);
+      x = new GridGallery(container, options);
     });
 
     it('Global must have the GridGallery as a property', function() {
