@@ -16,5 +16,10 @@ describe('GridGallery', function(){
       var x = new GridGallery();
       expect(x).to.have.property('options');
     });
+
+    it('should extend the default options and icludes the new one', function() {
+      var x = new GridGallery(document.createElement('div'), {lightBox: true});
+      expect(x.options).to.have.property('lightBox', true);
+    });
   });
 });
