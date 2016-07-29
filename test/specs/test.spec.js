@@ -12,8 +12,9 @@ describe('GridGallery', function(){
      expect(window.GridGallery).to.not.equal(undefined);
     });
 
-    it('should manipulate the default options', function() {
-      expect(window.GridGallery).to.have.property('options');
+    it('should manipulate the default options to the created instance', function() {
+      var x = new GridGallery();
+      expect(x).to.have.property('options');
     });
   });
 });
