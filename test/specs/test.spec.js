@@ -9,7 +9,7 @@
 describe('GridGallery', function(){
   describe('GridGallery initialization', function(){
     it('Global must have the GridGallery as a property', function() {
-     expect(window.GridGallery).to.equal(true);
+     expect(window.GridGallery).to.not.equal(undefined);
     });
   });
 });
