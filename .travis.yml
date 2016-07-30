@@ -2,7 +2,7 @@ language: node_js
 node_js:
   - "4.1.2"
 before_script:
-  - npm install -g gulp
+  - npm install -g gulp phantomjs karma
 script:
   - npm test
   - npm run build
