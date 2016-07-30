@@ -11,7 +11,7 @@ describe('GridGallery', function(){
     var x, options = { lightBox: true };
     var container;
 
-    before(function() {
+    beforeAll(function() {
       container = document.createElement('div');
       container.className = 'grid-gallery';
 
@@ -25,20 +25,20 @@ describe('GridGallery', function(){
     });
 
     it('Global must have the GridGallery as a property', function() {
-     expect(GridGallery).to.not.equal(undefined);
+     expect(GridGallery).not.toBeUndefined();
     });
 
     it('should manipulate the default options to the created instance', function() {
       var y = new GridGallery();
-      expect(y.options).to.have.property('lightBox', false);
+      expect(y.options).toEqual({'lightBox': false});
     });
 
     it('should extend the default options and icludes the new one', function() {
-      expect(x.options).to.have.property('lightBox', true);
+      expect(x.options).toEqual({'lightBox': true});
     });
 
     it('should store the container as a property', function() {
-      expect(x).to.have.property('_element', container);
+      expect(x._element).toEqual(container);
     });
   });
 });

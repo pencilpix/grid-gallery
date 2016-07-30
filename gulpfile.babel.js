@@ -1,11 +1,12 @@
 import gulp from 'gulp'
 import gulpLoadPlugins from 'gulp-load-plugins'
 import browserSync from 'browser-sync'
-import mochaPhantomJS from 'gulp-mocha-phantomjs'
 import del from 'del'
+import karma from 'karma'
 
 const $ = gulpLoadPlugins()
 const reload = browserSync.reload
+const KarmaServer = karma.Server
 
 const lintOptions = {
   rules: {
@@ -16,9 +17,6 @@ const lintOptions = {
 const testLintOptions = {
   rules: {
     'no-undef': 1
-  },
-  env: {
-    mocha: true
   }
 }
 
@@ -64,34 +62,6 @@ gulp.task('lint', lint('src/assets/js/**/*.js', lintOptions));
 gulp.task('lint:test', lint('test/specs/**/*.js', testLintOptions));
 
 
-gulp.task('test', () => {
-    return gulp
-      .src('test/index.html')
-      .pipe(mochaPhantomJS({
-          reporter: 'spec',
-          mocha: {colors: true},
-          phantomjs: {
-            hooks: 'mocha-phantomjs-istanbul',
-            coverageFile: './coverage/coverage.json',
-            viewportSize: {
-                width: 1024,
-                height: 768
-            },
-            useColors:true,
-            suppressStdout: true,
-            suppressStderr: true
-          }
-      }))
-      .on('finish', function() {
-        gulp.src('./coverage/coverage.json')
-          .pipe($.istanbulReport())
-      });
-})
-
-gulp.task('watch:test', ['lint:test'], function(){
-  gulp.watch(['src/assets/js/**/*.js', 'test/specs/**/*.js'], ['test'])
-})
-
 gulp.task('serve', ['styles', 'scripts'], () => {
   browserSync({
     notify: false,
@@ -111,6 +81,25 @@ gulp.task('serve', ['styles', 'scripts'], () => {
 
   gulp.watch(['src/assets/sass/**/*.scss', 'src/assets/sass/**/*.sass'], ['styles']);
   gulp.watch('src/assets/js/**/*.js', ['scripts']);
+});
+
+// testing
+gulp.task('test', (done) => {
+  let server =  new KarmaServer({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true
+  }, done)
+
+  server.on('run_complete', function(){
+    gulp.src('test/coverage/**/coverage.json')
+      .pipe($.istanbulReport())
+  })
+
+  server.start()
+})
+
+gulp.task('watch:test', function() {
+  gulp.watch(['src/assets/js/*.js', 'test/specs/*.js'], ['test'])
 });
 
 // clean the miss before build
