@@ -33,6 +33,22 @@
     return obj1;
   }
 
+
+  /*
+   * _checkItems Private method that check if GridGallery enabled on items
+   * @param { Array-like } items The grid elements.
+   * @return { Array-like } notEnabled The grid items that not set yet.
+   */
+  function _checkItems(items) {
+    var notEnabled = Array.prototype.map.call(items, function(item) {
+      if(!item.dataset.grid)
+        return item
+    });
+
+    if (notEnabled)
+      return notEnabled
+  }
+
   /*
    * class constructor of GridGallery component
    * @param { HTMLElement } element The element that will be the container.
