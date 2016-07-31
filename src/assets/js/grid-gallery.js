@@ -41,12 +41,14 @@
    */
   function _checkItems(items) {
     var notEnabled = Array.prototype.map.call(items, function(item) {
-      if(!item.dataset.grid)
-        return item
+      if(!item.dataset.grid){
+        return item;
+      }
     });
 
-    if (notEnabled)
-      return notEnabled
+    if (notEnabled){
+      return notEnabled;
+    }
   }
 
   /*
@@ -63,6 +65,6 @@
     this.options = _extend(this.options, options); // extend default to custom
   }
 
-  window.GridGallery = GridGallery; // makes the component globally exist.
+  $win.GridGallery = GridGallery; // makes the component globally exist.
 })(document, window);
 
