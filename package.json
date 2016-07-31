@@ -1,7 +1,8 @@
 {
-  "name": "plugin-boilerplate",
+  "name": "grid-galler",
   "version": "0.0.1",
   "description": "ls",
+  "private": false,
   "main": "index.js",
   "scripts": {
     "test": "gulp test",
@@ -52,6 +53,7 @@
     }
   },
   "dependencies": {
+    "bourbon": "^4.2.7",
     "jquery": "^2.1.1"
   }
 }
