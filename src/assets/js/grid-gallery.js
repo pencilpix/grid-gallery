@@ -63,7 +63,18 @@
 
     this.options = _extend({}, _defaultOptions); // extend options to default
     this.options = _extend(this.options, options); // extend default to custom
+
+    this.init();
   }
+
+
+  /*
+   * init this method that do the rest of initialization
+   * work and updates the dom.
+   */
+  GridGallery.prototype.init = function() {
+
+  };
 
   $win.GridGallery = GridGallery; // makes the component globally exist.
 })(document, window);
