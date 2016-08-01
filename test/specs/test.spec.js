@@ -38,7 +38,7 @@ describe('GridGallery', function(){
     });
 
     it('should store the container as a property', function() {
-      expect(x._element).toEqual(container);
+      expect(x.element).toEqual(container);
     });
   });
 });
