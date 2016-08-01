@@ -40,5 +40,10 @@ describe('GridGallery', function(){
     it('should store the container as a property', function() {
       expect(x.element).toEqual(container);
     });
+
+    it('should have method init', function() {
+      expect(x.init).toBeDefined();
+      expect(typeof x.init).toBe('function');
+    });
   });
 });
