@@ -13,7 +13,7 @@
 
   /*=========================
    * @private helper functions
-   *========================/
+   *=========================*/
 
    /*
     * _extend Private method that extends an object using
