@@ -10,16 +10,27 @@ describe('GridGallery', function(){
   describe('GridGallery initialization', function(){
     var x, options = { lightBox: true };
     var container;
+    document.body.className = 'grid-gallery__example';
 
     beforeAll(function() {
+      var wrapper = document.createElement('div');
+      wrapper.className = 'container';
+
+
       container = document.createElement('div');
       container.className = 'grid-gallery';
 
       for (var i = 0; i < 5; i++) {
         var element = document.createElement('div');
-        element.className = 'grid-gallery__item';
+        var p = document.createElement('p');
+        p.textContent = 'lorem nav of items in grid (disable/enable) depending on initialization';
+        element.className = 'grid-gallery__item grid-gallery__dummy';
+        element.appendChild(p);
         container.appendChild(element);
       }
+
+      wrapper.appendChild(container);
+      document.body.appendChild(wrapper);
 
       x = new GridGallery(container, options);
     });
@@ -29,7 +40,7 @@ describe('GridGallery', function(){
     });
 
     it('should manipulate the default options to the created instance', function() {
-      var y = new GridGallery();
+      var y = new GridGallery( container, {});
       expect(y.options).toEqual({'lightBox': false});
     });
 
