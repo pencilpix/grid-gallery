@@ -41,12 +41,12 @@
    */
   function _checkItems(items) {
     var notEnabled = Array.prototype.map.call(items, function(item) {
-      if(!item.dataset.grid){
+      if(!item.dataset.grid && item.className === 'grid-gallery__item'){
         return item;
       }
     });
 
-    if (notEnabled){
+    if (notEnabled.length){
       return notEnabled;
     }
   }
