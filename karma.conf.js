@@ -15,6 +15,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      'dev/assets/css/styles.css',
       'src/assets/js/*.js',
       'test/specs/*.js'
     ],
@@ -72,7 +73,29 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS'],
+    browsers: ['PhantomJS_custom'],
+
+    customLaunchers: {
+      'PhantomJS_custom': {
+        base: 'PhantomJS',
+        options: {
+          windowName: 'my-window',
+          settings: {
+            websecurityEnabled: false
+          },
+          viewportSize: {
+            width: 1280,
+            height: 1000
+          }
+        },
+        flags: ['--load-images=true'],
+        debug: false
+      }
+    },
+
+    phantomjsLauncher: {
+      exitOnResourceError: true
+    },
 
 
     // Continuous Integration mode
