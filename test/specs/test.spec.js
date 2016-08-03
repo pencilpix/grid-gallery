@@ -31,7 +31,6 @@ describe('GridGallery', function(){
     wrapper.appendChild(container);
     document.body.appendChild(wrapper);
 
-    x = new GridGallery(container, options);
   });
 
   afterEach(function(){
@@ -42,6 +41,7 @@ describe('GridGallery', function(){
   describe('GridGallery initialization', function(){
 
     it('Global must have the GridGallery as a property', function() {
+      x = new GridGallery(container, options);
      expect(GridGallery).not.toBeUndefined();
     });
 
@@ -55,14 +55,17 @@ describe('GridGallery', function(){
     });
 
     it('should extend the default options and icludes the new one', function() {
+      x = new GridGallery(container, options);
       expect(x.options).toEqual({'lightBox': true});
     });
 
     it('should store the container as a property', function() {
+      x = new GridGallery(container, options);
       expect(x.element).toEqual(container);
     });
 
     it('should have method init', function() {
+      x = new GridGallery(container, options);
       expect(x.init).toBeDefined();
       expect(typeof x.init).toBe('function');
     });
