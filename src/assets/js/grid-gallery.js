@@ -53,22 +53,6 @@
   }
 
   /*
-   * class constructor of GridGallery component
-   * @param { HTMLElement } element The element that will be the container.
-   * @param { Object } options The options to initialize the component.
-   */
-  function GridGallery(element, options) {
-    var _defaultOptions = { lightBox: false };
-
-    this.element = element;
-
-    this.options = _extend({}, _defaultOptions); // extend options to default
-    this.options = _extend(this.options, options); // extend default to custom
-
-    this.init();
-  }
-
-  /*
    * _enableItems Private method to handle un-enabled grid items
    * and give each element position and data-grid attribute.
    * @param { Array } items un-enabled elements.
@@ -129,6 +113,22 @@
 
     items[0].parentNode.style.height = parentHeight + 'px';
     return enabled;
+  }
+
+  /*
+   * class constructor of GridGallery component
+   * @param { HTMLElement } element The element that will be the container.
+   * @param { Object } options The options to initialize the component.
+   */
+  function GridGallery(element, options) {
+    var _defaultOptions = { lightBox: false };
+
+    this.element = element;
+
+    this.options = _extend({}, _defaultOptions); // extend options to default
+    this.options = _extend(this.options, options); // extend default to custom
+
+    this.init();
   }
 
 
