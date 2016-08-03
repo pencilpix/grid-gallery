@@ -69,5 +69,13 @@ describe('GridGallery', function(){
       expect(x.init).toBeDefined();
       expect(typeof x.init).toBe('function');
     });
+  })
+
+  describe('init() method', function() {
+    it('should update the element and its childrens', function(){
+      x = new GridGallery(container, options)
+      expect(document.querySelector('.grid-gallery').offsetHeight).not.toBeLessThan(200);
+      expect(document.querySelector('.grid-gallery__item').dataset.grid).toBe('true');
+    })
   });
 });
