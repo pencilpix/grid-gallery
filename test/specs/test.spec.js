@@ -76,6 +76,16 @@ describe('GridGallery', function(){
       x = new GridGallery(container, options)
       expect(document.querySelector('.grid-gallery').offsetHeight).not.toBeLessThan(200);
       expect(document.querySelector('.grid-gallery__item').dataset.grid).toBe('true');
-    })
+    });
+
+    it('should update children positions', function() {
+      var items;
+      x = new GridGallery(container, options);
+
+      items = document.body.querySelectorAll('.grid-gallery__item');
+      for(var i = 0; i < items.length; i++) {
+        expect(items[i].style.left).not.toBe('');
+      }
+    });
   });
 });
