@@ -56,7 +56,7 @@
    * _enableItems Private method to handle un-enabled grid items
    * and give each element position and data-grid attribute.
    * @param { Array } items un-enabled elements.
-   * @retrun { Array } enabledItems elements after update position
+   * @retrun { Array } enabled elements after update position
    * and data-grid.
    */
   function _enableItems(items) {
