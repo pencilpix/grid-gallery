@@ -37,7 +37,7 @@
   /*
    * _checkItems Private method that check if GridGallery enabled on items
    * @param { Array-like } items The grid elements.
-   * @return { Array-like } notEnabled The grid items that not set yet.
+   * @return { Array } notEnabled The grid items that not set yet.
    */
   function _checkItems(items) {
     var notEnabled = Array.prototype.map.call(items, function(item) {
