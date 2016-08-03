@@ -41,7 +41,8 @@
    */
   function _checkItems(items) {
     var notEnabled = Array.prototype.map.call(items, function(item) {
-      if(!item.dataset.grid && item.className === 'grid-gallery__item'){
+      var pattern = new RegExp('grid-gallery__item');
+      if(!item.dataset.grid && pattern.test(item.className)){
         return item;
       }
     });
