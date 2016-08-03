@@ -68,13 +68,76 @@
     this.init();
   }
 
+  /*
+   * _enableItems Private method to handle un-enabled grid items
+   * and give each element position and data-grid attribute.
+   * @param { Array } items un-enabled elements.
+   * @retrun { Array } enabledItems elements after update position
+   * and data-grid.
+   */
+  function _enableItems(items) {
+    var parentPos = items[0].parentNode.getBoundingClientRect();
+    var rowItemsNo = Math.floor(parentPos.width / items[0].offsetWidth);
+    var nextPos = [];
+    var prevItem, parentHeight;
+    var whiteSpace = parentPos.width - items[0].offsetWidth * 4;
+
+    // enable elements and set each item position
+    var enabled = items.map(function(item, index, ar) {
+     if(index === 0) {
+       item.style.top = 0;
+       item.style.left = whiteSpace / 2 + 'px';
+
+       nextPos[0] = {
+         top: item.offsetHeight,
+         left: 0
+       }
+     } else if(index < rowItemsNo) {
+       prevItem = ar[index - 1];
+
+       item.style.top = 0;
+       item.style.left = prevItem.offsetLeft + prevItem.offsetWidth + 'px';
+
+       nextPos[index] = {
+         top: item.offsetHeight,
+         left: item.offsetLeft
+       };
+     } else if(index % rowItemsNo <= nextPos.length){
+       var posIndex = index % rowItemsNo;
+
+       item.style.top = nextPos[posIndex].top + 'px';
+       item.style.left = (posIndex) ? nextPos[posIndex].left + 'px' : (whiteSpace / 2) + 'px';
+
+       nextPos[posIndex] = {
+         top: item.offsetTop + item.offsetHeight,
+         left: item.offsetLeft
+       };
+     }
+
+     item.dataset.grid = true;
+    });
+
+    // set container height
+    parentHeight = nextPos.reduce(function(prevPos, pos) {
+      if(prevPos > pos.top) {
+        return prevPos;
+      } else {
+        prevPos = pos.top;
+        return prevPos;
+      }
+    }, nextPos[0].top);
+
+    items[0].parentNode.style.height = parentHeight + 'px';
+    return enabled;
+  }
+
 
   /*
    * init this method that do the rest of initialization
    * work and updates the dom.
    */
   GridGallery.prototype.init = function() {
-
+    _enableItems(_checkItems(this.element.children))
   };
 
   $win.GridGallery = GridGallery; // makes the component globally exist.
