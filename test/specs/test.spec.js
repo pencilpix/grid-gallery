@@ -40,7 +40,11 @@ describe('GridGallery', function(){
     });
 
     it('should manipulate the default options to the created instance', function() {
-      var y = new GridGallery( container, {});
+      var div = document.createElement('div');
+      var childs = document.createElement('div');
+      childs.className = 'grid-gallery__item';
+      div.appendChild(childs);
+      var y = new GridGallery( div, {});
       expect(y.options).toEqual({'lightBox': false});
     });
 
