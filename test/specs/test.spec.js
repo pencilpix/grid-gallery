@@ -11,7 +11,7 @@ describe('GridGallery', function(){
   var container;
   document.body.className = 'grid-gallery__example';
 
-  beforeAll(function() {
+  beforeEach(function() {
     var wrapper = document.createElement('div');
     wrapper.className = 'container';
 
@@ -32,6 +32,11 @@ describe('GridGallery', function(){
     document.body.appendChild(wrapper);
 
     x = new GridGallery(container, options);
+  });
+
+  afterEach(function(){
+    var oldContainer = document.querySelector('.container');
+    oldContainer.parentNode.removeChild(oldContainer);
   });
 
   describe('GridGallery initialization', function(){
