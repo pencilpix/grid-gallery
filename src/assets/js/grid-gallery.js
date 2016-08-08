@@ -64,7 +64,7 @@
     var rowItemsNo = Math.floor(parentPos.width / items[0].offsetWidth);
     var nextPos = [];
     var prevItem, parentHeight;
-    var whiteSpace = parentPos.width - items[0].offsetWidth * 4;
+    var whiteSpace = parentPos.width - items[0].offsetWidth * (Math.floor(parentPos.width / items[0].offsetWidth));
 
     // enable elements and set each item position
     var enabled = items.map(function(item, index, ar) {
