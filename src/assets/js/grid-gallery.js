@@ -52,6 +52,18 @@
     }
   }
 
+  /**
+   * method that return the whitespace after get the available number of
+   * items will be distributed through the parent width
+   * @param  { Number } parentWidth width of the container
+   * @param  { Number } itemWidth the item width
+   * @return { Number } whiteSpace.
+   */
+  function _calWhiteSpace (parentWidth, itemWidth) {
+    var itemsNo = Math.floor(parentWidth / itemWidth);
+    return parentWidth - itemWidth * itemsNo;
+  }
+
   /*
    * _enableItems Private method to handle un-enabled grid items
    * and give each element position and data-grid attribute.
