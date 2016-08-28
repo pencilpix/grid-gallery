@@ -88,4 +88,19 @@ describe('GridGallery', function(){
       }
     });
   });
+
+  describe('Private Methods', function() {
+    it('private _extend should be defined', function(){
+      x = new GridGallery(container, options);
+      expect(x.__test__.extend).toBeDefined();
+    });
+
+    it('private _extend should return an object after adding another one\'s properties' , function(){
+      x = new GridGallery(container, options);
+      var obj1 = {}, obj2 = {x: true};
+      expect(x.__test__.extend(obj1, obj2)).toEqual(obj2);
+      obj2.y = 'hello';
+      expect(x.__test__.extend({}, obj2)).toEqual(obj2);
+    });
+  });
 });
