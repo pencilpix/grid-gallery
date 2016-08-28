@@ -152,6 +152,15 @@
     _enableItems(_checkItems(this.element.children))
   };
 
+  /* test-code */
+  GridGallery.prototype.__test__ = {
+    extend:        _extend,
+    checkItems:    _checkItems,
+    calWhiteSpace: _calWhiteSpace,
+    enableItems:   _enableItems
+  }
+  /* end-test-code */
+
   $win.GridGallery = GridGallery; // makes the component globally exist.
 })(document, window);
 
