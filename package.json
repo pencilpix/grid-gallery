@@ -6,7 +6,8 @@
   "main": "index.js",
   "scripts": {
     "test": "gulp test",
-    "build": "gulp"
+    "build": "gulp",
+    "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
   "author": "Mohamed Hassan",
   "license": "MIT",
@@ -35,6 +36,7 @@
     "gulp-useref": "^3.1.0",
     "karma": "^1.1.2",
     "karma-coverage": "^1.1.1",
+    "karma-coveralls": "^1.1.2",
     "karma-jasmine": "^1.0.2",
     "karma-phantomjs-launcher": "^1.0.1",
     "karma-spec-reporter": "0.0.26"
