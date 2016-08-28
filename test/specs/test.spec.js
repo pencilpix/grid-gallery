@@ -102,5 +102,14 @@ describe('GridGallery', function(){
       obj2.y = 'hello';
       expect(x.__test__.extend({}, obj2)).toEqual(obj2);
     });
+
+    it('private _extend: should extend object from other object\'s own properties' , function(){
+      x = new GridGallery(container, options);
+      var obj1 = {z: 4}, obj3 = Object.create(obj1);
+      obj3.w = true;
+
+      expect(x.__test__.extend({}, obj3).z).toBeUndefined();
+      expect(x.__test__.extend({}, obj3).w).toBe(true);
+    });
   });
 });
