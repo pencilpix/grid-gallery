@@ -90,12 +90,12 @@ describe('GridGallery', function(){
   });
 
   describe('Private Methods', function() {
-    it('private _extend should be defined', function(){
+    it('Private _extend: should be defined', function(){
       x = new GridGallery(container, options);
       expect(x.__test__.extend).toBeDefined();
     });
 
-    it('private _extend should return an object after adding another one\'s properties' , function(){
+    it('Private _extend: should return an object after adding another one\'s properties' , function(){
       x = new GridGallery(container, options);
       var obj1 = {}, obj2 = {x: true};
       expect(x.__test__.extend({}, obj2)).toEqual(obj2);
@@ -103,7 +103,7 @@ describe('GridGallery', function(){
       expect(x.__test__.extend({}, obj2)).toEqual(obj2);
     });
 
-    it('private _extend: should extend object from other object\'s own properties' , function(){
+    it('Private _extend: should extend object from other object\'s own properties' , function(){
       x = new GridGallery(container, options);
       var obj1 = {z: 4}, obj3 = Object.create(obj1);
       obj3.w = true;
