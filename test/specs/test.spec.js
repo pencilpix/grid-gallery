@@ -111,5 +111,10 @@ describe('GridGallery', function(){
       expect(x.__test__.extend({}, obj3).z).toBeUndefined();
       expect(x.__test__.extend({}, obj3).w).toBe(true);
     });
+
+    it('Private _checkItems: should be defined', function() {
+      x = new GridGallery(container, options);
+      expect(x.__test__.checkItems).toBeDefined();
+    });
   });
 });
