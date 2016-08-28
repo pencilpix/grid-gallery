@@ -128,7 +128,7 @@ describe('GridGallery', function(){
       items = document.querySelectorAll('.grid-gallery__item');
 
       expect(x.__test__.checkItems(items).length).toBe(5);
-      expect(x.__test__.checkItems(items)[0].className).toBe('.grid-gallery__item');
+      expect(x.__test__.checkItems(items)[0].className).toBe('grid-gallery__item');
       expect(x.__test__.checkItems(items)[0].dataset.grid).toBeUndefined();
     });
   });
