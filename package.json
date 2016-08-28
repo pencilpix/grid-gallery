@@ -7,7 +7,7 @@
   "scripts": {
     "test": "gulp test",
     "build": "gulp",
-    "coveralls": "cat ./coverage/lcov.info | coveralls"
+    "coveralls": "cat ./coverage/**/lcov.info | coveralls"
   },
   "author": "Mohamed Hassan",
   "license": "MIT",
