@@ -40,7 +40,7 @@
    * @return { Array } notEnabled The grid items that not set yet.
    */
   function _checkItems(items) {
-    var notEnabled = Array.prototype.map.call(items, function(item) {
+    var notEnabled = Array.prototype.filter.call(items, function(item) {
       var pattern = new RegExp('grid-gallery__item');
       if(!item.dataset.grid && pattern.test(item.className)){
         return item;
