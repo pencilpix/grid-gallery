@@ -116,5 +116,20 @@ describe('GridGallery', function(){
       x = new GridGallery(container, options);
       expect(x.__test__.checkItems).toBeDefined();
     });
+
+    it('Private _checkItems: should return Array of not Enabled items', function() {
+      var items;
+      x = new GridGallery(container, options);
+      for(var i = 0; i < 5; i++) {
+        var div = document.createElement('div');
+        div.className = 'grid-gallery__item';
+        document.body.appendChild(div);
+      }
+      items = document.querySelectorAll('.grid-gallery__item');
+
+      expect(x.__test__.checkItems(items).length).toBe(5);
+      expect(x.__test__.checkItems(items)[0].className).toBe('.grid-gallery__item');
+      expect(x.__test__.checkItems(items)[0].dataset.grid).toBeUndefined();
+    });
   });
 });
