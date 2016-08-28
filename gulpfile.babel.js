@@ -110,6 +110,10 @@ gulp.task('clean', del.bind(null, ['dev', 'dist']));
 gulp.task('html', ['styles', 'scripts'], () => {
   return gulp.src('src/*.html')
     .pipe($.useref({searchPath: ['dev', 'src', '.']}))
+    .pipe($.if('*.js', $.stripCode({
+      start_comment: 'test-block',
+      end_comment: 'end-test-block'
+    })))
     .pipe($.if('*.js', $.uglify()))
     .pipe($.if('*.css', $.cssnano()))
     .pipe($.if('*.html', $.htmlmin({collapseWhitespace: false})))
