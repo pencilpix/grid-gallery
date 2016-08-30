@@ -39,8 +39,12 @@ module.exports = function(config) {
     reporters: ['spec', 'coverage', 'coveralls'],
     // coverage options
     coverageReporter: {
-      type : 'lcov',
-      dir : 'test/coverage/'
+      // type : 'lcov',
+      dir : 'test/coverage/',
+      reporters: [
+        {type: 'lcov', subdir: 'lcov', file: 'lcov.info'},
+        {type: 'json', subdir: 'json', file: 'coverage.json'}
+      ]
     },
     // specReporter options
     specReporter: {
