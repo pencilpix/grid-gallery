@@ -131,5 +131,15 @@ describe('GridGallery', function(){
       expect(x.__test__.checkItems(items)[0].className).toBe('grid-gallery__item');
       expect(x.__test__.checkItems(items)[0].dataset.grid).toBeUndefined();
     });
+
+    it('Private _calWhiteSpace: Should return whitespace after calc max number of items', function() {
+      x = new GridGallery(container, options);
+      expect(x.__test__.calWhiteSpace(600, 180)).toEqual(60);
+    });
+
+    it('Private _calWhiteSpace: Should return whitespace = zero', function() {
+      x = new GridGallery(container, options);
+      expect(x.__test__.calWhiteSpace(600, 200)).toEqual(0);
+    });
   });
 });
