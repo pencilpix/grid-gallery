@@ -104,6 +104,20 @@ describe('GridGallery', function(){
         done();
       }, 300);
     });
+
+    it('should enable items and reposition it', function(done) {
+      var event;
+      x = new GridGallery(container, options);
+      event = document.createEvent('HTMLEvents');
+      event.initEvent('resize', true, false);
+      window.dispatchEvent(event);
+
+      setTimeout(function(){
+        var item = x.element.querySelector('.grid-gallery__item');
+        expect(item.dataset.grid).toEqual('true');
+        done();
+      }, 300);
+    });
   });
 
   describe('Private Methods', function() {
