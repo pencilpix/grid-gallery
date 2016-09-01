@@ -179,6 +179,8 @@
 
 
   GridGallery.prototype.update = function() {
+    _disableAll(this.element.querySelectorAll('.grid-gallery__item'));
+    _enableItems(_checkItems(this.element.children));
   };
 
   /* test-code */
