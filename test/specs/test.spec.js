@@ -158,5 +158,12 @@ describe('GridGallery', function(){
       x = new GridGallery(container, options);
       expect(x.__test__.calWhiteSpace(600, 200)).toEqual(0);
     });
+
+    it('Private _disableAll: Should return array of element each of which has data-grid = \'\'', function() {
+      x = new GridGallery(container, options);
+      expect(x.__test__.disableAll(x.element.querySelectorAll('.grid-gallery__item'))).toEqual(jasmine.any(Array));
+      expect(x.__test__.disableAll(x.element.querySelectorAll('.grid-gallery__item'))[0].dataset.grid).toEqual('');
+      expect(x.__test__.disableAll(x.element.querySelectorAll('.grid-gallery__item')).length).toEqual(5);
+    });
   });
 });
