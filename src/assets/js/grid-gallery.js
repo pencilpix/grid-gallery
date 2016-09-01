@@ -149,7 +149,24 @@
    * work and updates the dom.
    */
   GridGallery.prototype.init = function() {
-    _enableItems(_checkItems(this.element.children))
+    var _self = this,
+        resizeTimeout;
+
+    _enableItems(_checkItems(this.element.children));
+
+    window.addEventListener('resize', resizeHandler);
+
+    function resizeHandler() {
+      clearTimeout(resizeTimeout);
+
+      resizeTimeout = setTimeout(function(){
+        _self.update();
+      }, 250);
+    }
+  };
+
+
+  GridGallery.prototype.update = function() {
   };
 
   /* test-code */
@@ -162,5 +179,6 @@
   /* end-test-code */
 
   $win.GridGallery = GridGallery; // makes the component globally exist.
+
 })(document, window);
 
