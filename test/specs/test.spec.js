@@ -89,6 +89,23 @@ describe('GridGallery', function(){
     });
   });
 
+  describe('update() method', function(){
+    it('should be called on window resize', function(done){
+      var event;
+      x = new GridGallery(container, options);
+      spyOn(x, 'update');
+
+      event = document.createEvent('HTMLEvents');
+      event.initEvent('resize', true, false);
+      window.dispatchEvent(event);
+
+      setTimeout(function(){
+        expect(x.update).toHaveBeenCalled();
+        done();
+      }, 300);
+    });
+  });
+
   describe('Private Methods', function() {
     it('Private _extend: should be defined', function(){
       x = new GridGallery(container, options);
