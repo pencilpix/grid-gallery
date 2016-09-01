@@ -53,6 +53,18 @@
   }
 
   /**
+   * disables all items via data-grid
+   * @param  { Array-like } items grid items
+   * @return { Array }       array of items after clearing data-grid.
+   */
+  function _disableAll(items) {
+    return Array.prototype.map.call(items, function(item){
+      item.dataset.grid = '';
+      return item;
+    });
+  }
+
+  /**
    * method that return the whitespace after get the available number of
    * items will be distributed through the parent width
    * @param  { Number } parentWidth width of the container
@@ -174,7 +186,8 @@
     extend:        _extend,
     checkItems:    _checkItems,
     calWhiteSpace: _calWhiteSpace,
-    enableItems:   _enableItems
+    enableItems:   _enableItems,
+    disableAll: _disableAll
   }
   /* end-test-code */
 
