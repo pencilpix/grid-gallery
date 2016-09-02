@@ -93,6 +93,9 @@
     // enable elements and set each item position
     var enabled = items.map(function(item, index, ar) {
      if(index === 0) {
+       item.dataset.top = 0;
+       item.dataset.left = whiteSpace / 2;
+
        item.style.top = 0;
        item.style.left = whiteSpace / 2 + 'px';
 
@@ -103,22 +106,28 @@
      } else if(index < rowItemsNo) {
        prevItem = ar[index - 1];
 
+       item.dataset.top = 0;
+       item.dataset.left = Number(prevItem.dataset.left) + prevItem.offsetWidth;
+
        item.style.top = 0;
-       item.style.left = prevItem.offsetLeft + prevItem.offsetWidth + 'px';
+       item.style.left = Number(prevItem.dataset.left) + prevItem.offsetWidth + 'px';
 
        nextPos[index] = {
          top: item.offsetHeight,
-         left: item.offsetLeft
+         left: Number(item.dataset.left)
        };
      } else if(index % rowItemsNo <= nextPos.length){
        var posIndex = index % rowItemsNo;
+
+       item.dataset.top = nextPos[posIndex].top;
+       item.dataset.left = (posIndex) ? nextPos[posIndex].left : (whiteSpace / 2);
 
        item.style.top = nextPos[posIndex].top + 'px';
        item.style.left = (posIndex) ? nextPos[posIndex].left + 'px' : (whiteSpace / 2) + 'px';
 
        nextPos[posIndex] = {
-         top: item.offsetTop + item.offsetHeight,
-         left: item.offsetLeft
+         top: Number(item.dataset.top) + item.offsetHeight,
+         left: Number(item.dataset.left)
        };
      }
 
