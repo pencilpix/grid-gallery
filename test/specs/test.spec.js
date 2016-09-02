@@ -119,7 +119,7 @@ describe('GridGallery', function(){
       }, 300);
     });
 
-    it('should update positions if DOM changed', function(done){
+    it('should update positions if DOM changed using observer', function(done){
       var x = new GridGallery(container, options);
       spyOn(x, 'update');
       var div = document.createElement('div');
@@ -134,6 +134,27 @@ describe('GridGallery', function(){
       setTimeout(function(){
         expect(document.getElementById('dummyId').dataset.grid).toEqual('true');
         expect(document.getElementById('dummyId').offsetTop).not.toBeLessThan(100);
+        done();
+      }, 300);
+    });
+
+    it('should update positions if DOM changed using EventListener', function(done){
+      window.MutationObserver = undefined;
+      window.WebKitMutationObserver = undefined;
+      var x = new GridGallery(container, options);
+      spyOn(x, 'update');
+      var div = document.createElement('div');
+      var child = document.createElement('div');
+      div.id = "dummyId2";
+      div.className = ['grid-gallery__item'];
+      child.className = ' grid-gallery__dummy';
+      div.appendChild(child);
+      var cont = document.querySelector('.grid-gallery');
+      cont.appendChild(div);
+
+      setTimeout(function(){
+        expect(document.getElementById('dummyId2').dataset.grid).toEqual('true');
+        expect(document.getElementById('dummyId2').offsetTop).not.toBeLessThan(100);
         done();
       }, 300);
     });
