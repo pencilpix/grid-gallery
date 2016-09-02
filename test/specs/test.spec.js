@@ -118,6 +118,18 @@ describe('GridGallery', function(){
         done();
       }, 300);
     });
+
+    it('should update positions if DOM changed', function(){
+      var x = new GridGallery(container, options);
+      var div = document.createElement('div');
+      div.classList = ['grid-gallery__item grid-gallery__dummy'];
+      div.style.background = 'red';
+      var cont = document.querySelector('.grid-gallery');
+      cont.appendChild(div);
+
+      expect(div.dataset.grid).toEqual('true');
+      expect(div.offsetTop).not.toBeLessThan(200);
+    });
   });
 
   describe('Private Methods', function() {
