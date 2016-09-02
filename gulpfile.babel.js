@@ -10,7 +10,8 @@ const KarmaServer = karma.Server
 
 const lintOptions = {
   rules: {
-    'no-console': 1
+    'no-console': 1,
+    'no-undef': 1
   }
 }
 
