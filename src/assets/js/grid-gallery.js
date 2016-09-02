@@ -202,7 +202,16 @@
   }
   /* end-test-code */
 
-  $win.GridGallery = GridGallery; // makes the component globally exist.
+  if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+    module.exports = GridGallery;
+  } else {
+    if (typeof define === 'function' && define.amd) {
+      define([], function() {
+        return GridGallery;
+      });
+    } else {
+      $win.GridGallery = GridGallery;
+    }
+  }
 
 })(document, window);
-
