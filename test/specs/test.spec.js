@@ -119,16 +119,23 @@ describe('GridGallery', function(){
       }, 300);
     });
 
-    it('should update positions if DOM changed', function(){
+    it('should update positions if DOM changed', function(done){
       var x = new GridGallery(container, options);
+      spyOn(x, 'update');
       var div = document.createElement('div');
-      div.classList = ['grid-gallery__item grid-gallery__dummy'];
-      div.style.background = 'red';
+      var child = document.createElement('div');
+      div.id = "dummyId";
+      div.className = ['grid-gallery__item'];
+      child.className = ' grid-gallery__dummy';
+      div.appendChild(child);
       var cont = document.querySelector('.grid-gallery');
       cont.appendChild(div);
 
-      expect(div.dataset.grid).toEqual('true');
-      expect(div.offsetTop).not.toBeLessThan(200);
+      setTimeout(function(){
+        expect(document.getElementById('dummyId').dataset.grid).toEqual('true');
+        expect(document.getElementById('dummyId').offsetTop).not.toBeLessThan(100);
+        done();
+      }, 300);
     });
   });
 
