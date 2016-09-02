@@ -33,6 +33,42 @@
     return obj1;
   }
 
+  /**
+   * create an observer for dom element and invoke callback it the change is
+   * a node list.
+   * @param  { Object }      context   the Object that will be used in explicit call
+   * @param  { HTMLElement } target    the element that it should be observed
+   * @param  { Function }    callback  function that will run when DOM changed
+   * @return { Object }                observer
+   */
+  function _createObserver(context, target, callback) {
+    // MutationObserver compatability.
+    var MutationObserver = window.MutationObserver || window.WebKitMutationObserver,
+        eventListenerSupported = window.addEventListener;
+
+    // handler if MutationObserver is not supported
+    function _handler() {
+      callback.call(context);
+    }
+
+    if(MutationObserver) {
+      // create observer.
+      var observer = new MutationObserver(function(mutations) {
+        if(mutations[0].addedNodes.length || mutations[0].removedNodes.length){
+          callback.call(context);
+        }
+      });
+
+      // configuration of the observer:
+      var config = {childList: true};
+
+      // pass in the target node, as well as the observer options
+      observer.observe(target, config);
+    } else if(eventListenerSupported) {
+      target.addEventListener('DOMNodeInserted', _handler, false);
+      target.addEventListener('DOMNodeRemoved', _handler, false);
+    }
+  }
 
   /*
    * _checkItems Private method that check if GridGallery enabled on items
@@ -184,6 +220,9 @@
         _self.update();
       }, 250);
     }
+
+    // enable dom observer
+    _createObserver(this, this.element, this.update);
   };
 
 
