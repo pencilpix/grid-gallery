@@ -1,14 +1,22 @@
 {
-  "name": "grid-galler",
-  "version": "1.0.0-alpha",
-  "description": "ls",
+  "name": "grid-gallery",
+  "version": "1.0.1-alpha",
+  "description": "un-equal columns grid",
   "private": false,
-  "main": "index.js",
+  "main": "./dist/assets/js/grid-gallery.min.js",
+  "style": "./dist/assets/styles.css",
   "scripts": {
     "test": "gulp test",
     "build": "gulp",
     "coveralls": "cat ./coverage/**/lcov.info | coveralls"
   },
+  "keywords": [
+    "grid",
+    "un-equal",
+    "unequal",
+    "cols",
+    "columns"
+  ],
   "author": "Mohamed Hassan",
   "license": "MIT",
   "devDependencies": {
