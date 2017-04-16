@@ -161,31 +161,9 @@ describe('GridGallery', function(){
   });
 
   describe('Private Methods', function() {
-    it('Private _extend: should be defined', function(){
-      x = new GridGallery(container, options);
-      expect(x.__test__.extend).toBeDefined();
-    });
-
-    it('Private _extend: should return an object after adding another one\'s properties' , function(){
-      x = new GridGallery(container, options);
-      var obj1 = {}, obj2 = {x: true};
-      expect(x.__test__.extend({}, obj2)).toEqual(obj2);
-      obj2.y = 'hello';
-      expect(x.__test__.extend({}, obj2)).toEqual(obj2);
-    });
-
-    it('Private _extend: should extend object from other object\'s own properties' , function(){
-      x = new GridGallery(container, options);
-      var obj1 = {z: 4}, obj3 = Object.create(obj1);
-      obj3.w = true;
-
-      expect(x.__test__.extend({}, obj3).z).toBeUndefined();
-      expect(x.__test__.extend({}, obj3).w).toBe(true);
-    });
-
     it('Private _checkItems: should be defined', function() {
       x = new GridGallery(container, options);
-      expect(x.__test__.checkItems).toBeDefined();
+      expect(x._checkItems).toBeDefined();
     });
 
     it('Private _checkItems: should return Array of not Enabled items', function() {
@@ -198,26 +176,26 @@ describe('GridGallery', function(){
       }
       items = document.querySelectorAll('.grid-gallery__item');
 
-      expect(x.__test__.checkItems(items).length).toBe(5);
-      expect(x.__test__.checkItems(items)[0].className).toBe('grid-gallery__item');
-      expect(x.__test__.checkItems(items)[0].dataset.grid).toBeUndefined();
+      expect(x._checkItems(items).length).toBe(5);
+      expect(x._checkItems(items)[0].className).toBe('grid-gallery__item');
+      expect(x._checkItems(items)[0].dataset.grid).toBeUndefined();
     });
 
     it('Private _calWhiteSpace: Should return whitespace after calc max number of items', function() {
       x = new GridGallery(container, options);
-      expect(x.__test__.calWhiteSpace(600, 180)).toEqual(60);
+      expect(x._calWhiteSpace(600, 180)).toEqual(60);
     });
 
     it('Private _calWhiteSpace: Should return whitespace = zero', function() {
       x = new GridGallery(container, options);
-      expect(x.__test__.calWhiteSpace(600, 200)).toEqual(0);
+      expect(x._calWhiteSpace(600, 200)).toEqual(0);
     });
 
     it('Private _disableAll: Should return array of element each of which has data-grid = \'\'', function() {
       x = new GridGallery(container, options);
-      expect(x.__test__.disableAll(x.element.querySelectorAll('.grid-gallery__item'))).toEqual(jasmine.any(Array));
-      expect(x.__test__.disableAll(x.element.querySelectorAll('.grid-gallery__item'))[0].dataset.grid).toEqual('');
-      expect(x.__test__.disableAll(x.element.querySelectorAll('.grid-gallery__item')).length).toEqual(5);
+      expect(x._disableAll(x.element.querySelectorAll('.grid-gallery__item'))).toEqual(jasmine.any(Array));
+      expect(x._disableAll(x.element.querySelectorAll('.grid-gallery__item'))[0].dataset.grid).toEqual('');
+      expect(x._disableAll(x.element.querySelectorAll('.grid-gallery__item')).length).toEqual(5);
     });
   });
 });
