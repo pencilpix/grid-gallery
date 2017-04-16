@@ -4,9 +4,11 @@
  */
 import gulp from 'gulp';
 import gulpLoadPlugin from 'gulp-load-plugins';
+import browserSync from 'browser-sync';
 import {DEV_SRC, DEV_DEST} from '../utils.gulp';
 
 const $ = gulpLoadPlugin();
+const reload = browserSync.reload;
 
 export const sass = (() => {
 
@@ -21,7 +23,8 @@ export const sass = (() => {
       }).on('error', $.sass.logError))
       .pipe($.autoprefixer({browsers: ['> 1%', 'last 2 versions', 'Firefox ESR']}))
       .pipe($.sourcemaps.write())
-      .pipe(gulp.dest(DEV_DEST.css));
+      .pipe(gulp.dest(DEV_DEST.css))
+      .pipe(reload({stream: true}));
   });
 })();
 

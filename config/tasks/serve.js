@@ -24,7 +24,7 @@ export const serve = (() => {
       'src/assets/images/**/*'
     ]).on('change', reload);
 
-    gulp.watch([DEV_SRC.sass], [TASKS.sass]);
+    gulp.watch([DEV_SRC.sass.replace(/\.sass$/, '*/*.sass')], [TASKS.sass]);
     gulp.watch(DEV_SRC.js, [TASKS.js]);
   });
 
