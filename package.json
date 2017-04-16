@@ -3,10 +3,12 @@
   "version": "1.0.1-alpha",
   "description": "un-equal columns grid",
   "private": false,
-  "main": "./dist/assets/js/grid-gallery.min.js",
-  "style": "./dist/assets/styles.css",
+  "main": "./dist/js/grid-gallery.min.js",
+  "style": "./dist/css/grid-gallery.min.css",
   "scripts": {
+    "start": "gulp serve",
     "test": "gulp test",
+    "test:watch": "gulp watch:test",
     "build": "gulp",
     "coveralls": "cat ./coverage/**/lcov.info | coveralls"
   },
@@ -37,6 +39,7 @@
     "gulp-karma": "0.0.5",
     "gulp-load-plugins": "^1.2.4",
     "gulp-plumber": "^1.1.0",
+    "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.3.2",
     "gulp-size": "^2.1.0",
     "gulp-sourcemaps": "^1.6.0",

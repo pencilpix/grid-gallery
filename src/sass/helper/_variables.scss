@@ -1,0 +1,190 @@
+@import "functions";
+// fonts
+// -----
+
+// ltr fonts
+$ltrBodyFonts:          'roboto', helvetica, sans-serif;
+$ltrHeadFonts:          'robotomono', georgia, serif;
+
+// rtl fonts
+$rtlBodyFonts:          'droid-naskh', helvetica, sans-serif;
+$rtlHeadFonts:          'droid-kufi', georgia, serif;
+
+
+$rtlBodyFontFamily:     $rtlBodyFonts;
+$rtlHeadFontFamily:     $rtlHeadFonts;
+
+$ltrBodyFontFamily:     $ltrBodyFonts;
+$ltrHeadFontFamily:     $ltrHeadFonts;
+
+
+
+
+/*******************************************************************/
+/*** FONTS SETTING ***/
+/*******************************************************************/
+$htmlFontSize:          15px;
+$htmlSizeFraction:      15; // must be the same pixels of root element [html]
+
+$smallSize:             nToRem(12, $htmlSizeFraction); // 12px
+$normalSize:            nToRem(15, $htmlSizeFraction); // 15px
+$mediumSize:            nToRem(18, $htmlSizeFraction); // 18px
+$largeSize:             nToRem(21, $htmlSizeFraction); // 21px
+$xLargeSize:            nToRem(24, $htmlSizeFraction); // 24px
+$xxLargeSize:           nToRem(32, $htmlSizeFraction); // 32px
+$xxxLargeSize:          nToRem(42, $htmlSizeFraction); // 42px
+$lineHeight:            1.4285; // for body size 13px lineheight will be 20px;
+
+$bodySize:              $normalSize;
+$metaSize:              $smallSize;
+$headSix:               $smallSize;
+$headFive:              $normalSize;
+$headFour:              $mediumSize;
+$headThree:             $largeSize;
+$headTwo:               $xLargeSize;
+$headOne:               $xxLargeSize;
+$superHead:             $xxxLargeSize;
+$xSuperHead:            $superHead + 1;
+
+$headerIconSize:        $largeSize;
+$headerLinkSize:        $normalSize;
+
+$xsSpace:               nToRem(3, $htmlSizeFraction);
+$smSpace:               nToRem(6, $htmlSizeFraction);
+$nmSpace:               nToRem(12, $htmlSizeFraction);
+$mdSpace:               nToRem(24, $htmlSizeFraction);
+$lgSpace:               nToRem(48, $htmlSizeFraction);
+
+
+
+
+// blues
+$blue:                  #3f51b5;
+$blueDark:              darken($blue, 10%);
+
+// green
+$green:                 #2ac55d;
+$greenDark:             #20a84c;
+
+// orange
+$orange:                #f3935a;
+$orangeLight:           #f3b24b;
+
+// red
+$red:                   #ef5350;//#f57090;
+
+
+// greyscal
+$black:                 #313131;
+$greyDark:              #666666;
+$greyDark-alt:          #757575;
+$grey:                  #c9c9c9;
+$greyLight:             #eeeeee;
+$grey-light-alt:        #e9e9e9;
+$greyLighter:           #f6f6f6;
+$white:                 #ffffff;
+$blueBlack:             #293058;
+$blueGrey:              #5d6488;
+$blueGreyLight:         #e8eaf6;
+
+
+$twitterColor :         #f6fdff;
+$twitterBorderColor:    #e2f3f5;
+$twitterFootBg:         #e6f6fd;
+$twitterFootBorderColor:#c3e3f8;
+
+// social colors
+$facebookBlue:          #4d67a2;
+$googleOrange:          #e65d2f;
+$twitterBlue:           #5bbef7;
+$youtubeRed:            #e10909;
+$instagramBlue:         #125688;
+
+
+
+
+$blackShadowColor:      rgba(0, 0, 0, .1);
+$whiteShadowColor:      rgba(255, 255, 255, .5);
+
+
+
+$bodyBgColor:           $greyLighter;
+$bodyTxtColor:          $greyDark;
+$headerBgColor:         $greenDark;
+$headerLinkColor:       $grey;
+$headerLinkHover:       $red;
+$footerBgColor:         $green;
+$footerTxtColor:        $greyDark;
+$footerLinkColor:       $greyDark;
+
+$primaryTxtColor:       $blue;
+$successTxtColor:       darken($green, 50%);
+$infoTxtColor:          darken($blue, 20%);
+$infoAltTxtColor:       $blueDark;
+$warningTxtColor:       darken($orange, 10%);
+$dangerTxtColor:        dakken($red, 50%);
+$defaultTxtColor:       $greyDark;
+$defaultAltTxtColor:    $greyDark-alt;
+$inverseTxtColor:       $black;
+$whiteTxtColor:         $greyLight;
+
+$primaryColor:          $blue;
+$successColor:          $green;
+$infoColor:             lighten($blue, 20%);
+$infoAltColor:          lighten($green,20%);
+$warningColor:          $orange;
+$dangerColor:           $red;
+$defaultColor:          $greyLight;
+$defaultAltColor:       $greyLight;
+$whiteColor:            $white;
+$inverseColor:          $black;
+
+$primaryBorderColor:    $blue;
+$successBorderColor:    $green;
+$infoBorderColor:       lighten($blue, 10%);
+$infoAltBorderColor:    $green;
+$warningBorderColor:    $orange;
+$dangerBorderColor:     $red;
+$whiteBorderColor:      $white;
+$inverseBorderColor:    $black;
+$defaultBorderColor:    $greyLight;
+$defaultAltBorderColor: $grey;
+
+
+$headerLogoImage:   url(../images/logo.png);
+
+
+
+
+
+/*******************************************************************/
+/*** bootstrap responsive variables ***/
+/*******************************************************************/
+// Extra small screen / phone
+// Note: Deprecated $screen-xs and $screen-phone as of v3.0.1
+$screen-xs:             480px;
+$screen-xs-min:         $screen-xs;
+$screen-phone:          $screen-xs-min;
+
+// Small screen / tablet
+// Note: Deprecated $screen-sm and $screen-tablet as of v3.0.1
+$screen-sm:             768px;
+$screen-sm-min:         $screen-sm;
+$screen-tablet:         $screen-sm-min;
+
+// Medium screen / desktop
+// Note: Deprecated $screen-md and $screen-desktop as of v3.0.1
+$screen-md:             992px;
+$screen-md-min:         $screen-md;
+$screen-desktop:        $screen-md-min;
+
+// Large screen / wide desktop
+// Note: Deprecated $screen-lg and $screen-lg-desktop as of v3.0.1
+$screen-lg:             1200px;
+$screen-lg-min:         $screen-lg;
+$screen-lg-desktop:     $screen-lg-min;
+
+// So media queries don't overlap when required, provide a maximum
+$screen-xs-max:         ($screen-sm-min - 1);
+$screen-sm-max:         ($screen-md-min - 1);
+$screen-md-max:         ($screen-lg-min - 1);
