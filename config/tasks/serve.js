@@ -21,7 +21,7 @@ export const serve = (() => {
 
     gulp.watch([
       '.examples/*.html',
-      'src/assets/images/**/*'
+      'src/images/**/*'
     ]).on('change', reload);
 
     gulp.watch([DEV_SRC.sass.replace(/\.sass$/, '*/*.sass')], [TASKS.sass]);
