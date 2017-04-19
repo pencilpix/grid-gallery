@@ -26,6 +26,11 @@
       this.element = element;
 
       this.options = Object.assign({}, DEFAULTS, options); // extend options to default
+      this._resizeTimeout = null;
+      this._bindResizeHandler = this._resizeHandler.bind(this);
+
+
+
       this.init();
     }
 
@@ -38,22 +43,11 @@
      * work and updates the dom.
      */
     init() {
-      var _self = this,
-          resizeTimeout;
-
       this._enableItems(this._checkItems(this.element.children));
 
-      window.addEventListener('resize', resizeHandler);
-
-      function resizeHandler() {
-        clearTimeout(resizeTimeout);
-
-        resizeTimeout = setTimeout(function(){
-          _self.update();
-        }, 250);
-      }
-
-      // enable dom observer
+      // listen to resize and observe dom changes
+      // if any item is inserted via ajax ... etc.
+      window.addEventListener('resize', this._bindResizeHandler);
       this._createObserver(this, this.element, this.update);
     }
 
@@ -228,6 +222,14 @@
       return enabled;
     }
 
+
+    _resizeHandler() {
+      clearTimeout(this._resizeTimeout);
+
+      this._resizeTimeout = setTimeout(() => {
+        this.update();
+      }, 250);
+    }
   }
 
   if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
