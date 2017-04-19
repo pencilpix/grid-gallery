@@ -1,13 +1,6 @@
-/*
- * General specifications GridGallery
- * 1- creates a grid using elements that will be in different heights and widths
- * 2- will enable gallery view on click to an element of the grid (dialog)
- * 3- the dialog will trigger custom events to control data in dialog
- * 4- nav of items in grid (disable/enable) depending on initialization
- */
 
 describe('GridGallery', function(){
-  var x, options = { lightBox: true };
+  var x, options = { direction: 'left' };
   var container;
   document.body.className = 'grid-gallery__example';
 
@@ -51,12 +44,13 @@ describe('GridGallery', function(){
       childs.className = 'grid-gallery__item';
       div.appendChild(childs);
       var y = new GridGallery( div, {});
-      expect(y.options).toEqual({'lightBox': false});
+      expect(y.options).toEqual({direction: 'left'});
     });
 
     it('should extend the default options and icludes the new one', function() {
+      options.direction = 'right';
       x = new GridGallery(container, options);
-      expect(x.options).toEqual({'lightBox': true});
+      expect(x.options).toEqual({direction: 'right'});
     });
 
     it('should store the container as a property', function() {
