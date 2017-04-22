@@ -53,9 +53,10 @@ describe('GridGallery', () => {
   });
 
 
+  afterEach(() => {
+    document.body.removeChild(container);
+  })
 
-  it('should be defined', () => {
-    expect(GridGallery).toBeDefined();
-  });
+
 });
 
