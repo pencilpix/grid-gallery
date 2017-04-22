@@ -28,8 +28,8 @@
 
 
   class GridGallery {
-    constructor() {
-
+    constructor( element, options ) {
+      this.options = Object.assign({}, DEFAULTS, options);
     }
   }
 
