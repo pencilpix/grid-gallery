@@ -55,6 +55,7 @@ describe('GridGallery', () => {
 
   afterEach(() => {
     document.body.removeChild(container);
+    window.removeEventListener('resize', gridInstance._boundResizeHandler);
   });
 
 
@@ -148,6 +149,20 @@ describe('GridGallery', () => {
       expect(gridInstance.rows[1][1].position.left).toEqual(space + item.offsetWidth);
     });
 
+    it('should call update update on resize', (done) => {
+      let event = new CustomEvent('Event');
+      event.initEvent('resize', true, true);
+      gridInstance = new GridGallery(container);
+
+      spyOn(gridInstance, 'update');
+
+      window.dispatchEvent(event);
+
+      setTimeout(() => {
+        expect(gridInstance.update).toHaveBeenCalled();
+        done();
+      }, gridInstance._delay + 100);
+    });
 
   });
 });
