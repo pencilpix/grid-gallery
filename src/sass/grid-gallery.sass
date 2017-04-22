@@ -1,12 +1,24 @@
-// import bourbon library
-@import '../../node_modules/bourbon/app/assets/stylesheets/_bourbon.scss'
-// import helper files
-@import './helper/variables'
-@import './helper/functions'
-@import './helper/mixins'
+/**
+ * @Description: GridGallery is a tiny package that will generate a grid depending on
+ *               the elements height. It is not required to have the same height
+ *
+ * @Author:      Mohamed Hassan
+ * @Author Url:  http://mohamedhassan.me
+ *
+ * @License:     under MIT
+ *               https://github.com/pencilpix/grid-gallery/blob/master/LICENSE
+ */
 
+/**
+ * NOTE: 
+ * !important to apply these styles even if default classes is changed
+ */
+.grid-gallery
+  padding:  0
+  position: relative
 
-// import modules
-@import './modules/general'
-@import './modules/demo'
-@import './modules/main'
+.grid-gallery__item
+  margin:   0
+  padding:  0
+  position: absolute
+
