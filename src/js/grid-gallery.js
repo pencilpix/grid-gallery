@@ -23,7 +23,9 @@
 })('GridGallery', () => {
   const VERSION = '1.0.1';
 
-  const DEFAULTS = {};
+  const DEFAULTS = {
+    direction: 'left',
+  };
 
 
 
