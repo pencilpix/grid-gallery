@@ -99,8 +99,56 @@ describe('GridGallery', () => {
 
       expect(gridInstance.maxItemsPerRow).toBe(3);
       expect(gridInstance.remainSpace).toBe(50);
-    })
-  });
+    });
 
+    it('should set the rows number', () => {
+      container.style.width = '700px';
+      gridInstance = new GridGallery(container);
+
+      expect(gridInstance.lastIndex).toEqual(3);
+      expect(gridInstance.rows.length).toEqual(4);
+    });
+
+    it(`should set rows property and set the first item in first row
+        position to top 0 and left empty value`, () => {
+
+      let item = document.querySelector('.grid-gallery__item');
+      let itemsNo = Math.floor(container.offsetWidth / item.offsetWidth);
+      let space = Math.floor((container.offsetWidth - (item.offsetWidth * itemsNo))/2);
+      gridInstance = new GridGallery(container);
+
+      expect(gridInstance.rows[0][0].position.top).toEqual(0);
+      expect(gridInstance.rows[0][0].position.left).toEqual(space);
+    });
+
+    it(`should set rows property and set the first item in second row
+        position to top first item height and left empty value`, () => {
+
+      let item = document.querySelector('.grid-gallery__item');
+      let itemsNo = Math.floor(container.offsetWidth / item.offsetWidth);
+      let space = Math.floor((container.offsetWidth - (item.offsetWidth * itemsNo))/2);
+      gridInstance = new GridGallery(container);
+
+      expect(gridInstance.rows[1][0].position.top).toEqual(item.offsetHeight);
+      expect(gridInstance.rows[1][0].position.left).toEqual(space);
+    });
+
+    it(`should set rows property and set the second item in second row
+        position to top first item height and left empty value`, () => {
+
+      container.style.width = '700px';
+      let item = document.querySelector('.grid-gallery__item');
+      let itemsNo = Math.floor(container.offsetWidth / item.offsetWidth);
+      let space = Math.floor((container.offsetWidth - (item.offsetWidth * itemsNo))/2);
+      gridInstance = new GridGallery(container);
+      let prevItem = container.querySelectorAll('.grid-gallery__item')[1];
+
+
+      expect(gridInstance.rows[1][1].position.top).toEqual(prevItem.offsetHeight, 'height is not as expected');
+      expect(gridInstance.rows[1][1].position.left).toEqual(space + item.offsetWidth);
+    });
+
+
+  });
 });
 
