@@ -70,9 +70,16 @@ describe('GridGallery', () => {
       expect(gridInstance.options.direction).toEqual('right');
     });
 
-    it('should have property direction to left by default', () => {
+    it(`should have property direction to right/left by default
+        as document direction`, () => {
+      document.documentElement.dir = 'rtl';
       gridInstance = new GridGallery(container);
-      expect(gridInstance.options.direction).toEqual('left');
+      expect(gridInstance.options.direction).toEqual('right', 'should be right');
+
+      document.documentElement.dir = 'ltr';
+      gridInstance = new GridGallery(container);
+      expect(gridInstance.options.direction).toEqual('left', 'should be left');
+
     });
   });
 
