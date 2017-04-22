@@ -23,12 +23,24 @@
 })('GridGallery', () => {
   const VERSION = '1.0.1';
 
+  /**
+   * default options
+   *
+   * @type {Object}
+   */
   const DEFAULTS = {
     direction: 'left',
   };
 
 
 
+  /**
+   * GridGallery generates a grid that its
+   * item it's not required to be in the same height
+   *
+   * @param {HTMLElement}  element  grid container element
+   * @param {Object}       options  custom options
+   */
   class GridGallery {
     constructor( element, options ) {
       this.element = element;
@@ -133,17 +145,35 @@
 
 
 
+    /**
+     * Getter: calculate first item width.
+     *
+     * @return {Number}
+     */
     get itemWidth() {
       return this.element.children[0].offsetWidth;
     }
 
 
+    /**
+     * Getter: calculate the maximum number
+     * of elements can be positioned in one row.
+     *
+     * @return {Number}
+     */
     get maxItemsPerRow() {
       let containerWidth = this.element.offsetWidth;
       return Math.floor(containerWidth / this.itemWidth);
     }
 
 
+
+    /**
+     * Getter: calculate the remaining space after adding items in rows
+     * and return its half to be used as margin 'centering the items'
+     *
+     * @return {Number}
+     */
     get remainSpace() {
       let containerWidth = this.element.offsetWidth;
       let itemsWidth = this.maxItemsPerRow * this.itemWidth
@@ -153,7 +183,9 @@
 
 
     /**
-     * get last row index in grid
+     * Getter: calculate last row index in grid
+     *
+     * @return {Number}
      */
     get lastIndex() {
       return this.rows.length - 1;
@@ -161,6 +193,12 @@
 
 
 
+    /**
+     * Getter: check for current direction of document
+     * and update and return default options.
+     *
+     * @return {Object}
+     */
     static get DEFAULTS () {
       if(document.documentElement.dir === 'rtl')
         DEFAULTS.direction = 'right';
