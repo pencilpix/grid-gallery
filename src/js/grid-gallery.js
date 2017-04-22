@@ -36,6 +36,13 @@
     }
 
 
+
+    get itemWidth () {
+      return this.element.querySelector('.grid-gallery__item').offsetWidth;
+    }
+
+
+
     static get DEFAULTS () {
       if(document.documentElement.dir === 'rtl')
         DEFAULTS.direction = 'right';

@@ -79,8 +79,19 @@ describe('GridGallery', () => {
       document.documentElement.dir = 'ltr';
       gridInstance = new GridGallery(container);
       expect(gridInstance.options.direction).toEqual('left', 'should be left');
-
     });
+
+    it('should have a getter itemWidth', () => {
+      gridInstance = new GridGallery(container);
+
+      expect(gridInstance.itemWidth).toEqual(200);
+
+      [...container.querySelectorAll('.grid-gallery__item')].forEach((item) => {
+        item.style.width = '300px';
+      });
+
+      expect(gridInstance.itemWidth).toEqual(300);
+    })
   });
 
 });
