@@ -69,6 +69,11 @@ describe('GridGallery', () => {
       gridInstance = new GridGallery(container, {direction: 'right'});
       expect(gridInstance.options.direction).toEqual('right');
     });
+
+    it('should have property direction to left by default', () => {
+      gridInstance = new GridGallery(container);
+      expect(gridInstance.options.direction).toEqual('left');
+    });
   });
 
 });
