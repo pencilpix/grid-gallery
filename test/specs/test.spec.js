@@ -1,5 +1,59 @@
 
 describe('GridGallery', () => {
+  let container, items, gridInstance;
+
+  /**
+   * create and insert element as a last child
+   * applying to it a class name.
+   * @param {HTMLElement}  wrap       wrapper to insert new element in
+   * @param {String}       elem       type of element div/section ...etc
+   * @param {String}       className  custom class to give to new element
+   * @return {HTMLElement}
+   */
+  function insertElement(wrap, elem, className, styles) {
+    let element = document.createElement(elem);
+
+    if(className)
+      element.className = className;
+
+    if(styles) {
+      for(let prop in styles) {
+        element.style[prop] = styles[prop];
+      }
+    }
+
+    wrap.appendChild(element);
+
+    return element;
+  }
+
+  beforeEach(() => {
+    container = insertElement(document.body, 'div', 'grid-gallery');
+
+    for(let i = 0; i <= 10; i++) {
+      insertElement(container, 'div', 'grid-gallery__item');
+    }
+
+    items = document.querySelectorAll('.grid-gallery__item');
+    [...items].forEach((item, i) => {
+      let height;
+      let width = '200px';
+
+      if(i === 0)
+        height = '230px';
+      else if(i === 7)
+        height = '250px';
+      else if(i % 2 === 0)
+        height = '200px';
+      else
+        height = '190px';
+
+      insertElement(item, 'div', 'demo-element', {height:  height, width: width});
+    })
+  });
+
+
+
   it('should be defined', () => {
     expect(GridGallery).toBeDefined();
   });
