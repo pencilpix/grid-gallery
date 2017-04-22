@@ -47,12 +47,27 @@
       this.options = Object.assign({}, GridGallery.DEFAULTS, options);
       this.rows = [];
 
+      this._timeout = null;
+      this._delay = 300;
+      this._boundResizeHandler = this._resizeHandler.bind(this);
+
       this.init();
     }
 
 
 
     init() {
+      this.updateGridRows();
+      this.updatePositions();
+
+
+      window.addEventListener('resize', this._boundResizeHandler);
+    }
+
+
+
+    update() {
+      this.rows = [];
       this.updateGridRows();
       this.updatePositions();
     }
@@ -141,6 +156,18 @@
           rowItem.item.style[direction] = rowItem.position[direction] + 'px';
         });
       });
+    }
+
+
+
+    _resizeHandler() {
+      let start = Date.now();
+      clearTimeout(this._timeout);
+
+      this._timeout = setTimeout(() => {
+        if(this.itemWidth)
+          this.update();
+      }, this._delay);
     }
 
 
