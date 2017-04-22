@@ -31,6 +31,7 @@
 
   class GridGallery {
     constructor( element, options ) {
+      this.element = element;
       this.options = Object.assign({}, GridGallery.DEFAULTS, options);
     }
 
