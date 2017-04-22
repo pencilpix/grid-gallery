@@ -6,6 +6,8 @@ before_install:
   - npm install -g gulp phantomjs karma
   - npm update -g
 script:
+  - npm run scripts
+  - npm run styles
   - npm test
   - npm run build
 

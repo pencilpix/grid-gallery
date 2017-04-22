@@ -7,6 +7,8 @@
   "style": "./dist/css/grid-gallery.min.css",
   "scripts": {
     "start": "gulp serve",
+    "scripts": "gulp scripts",
+    "styles": "gulp styles",
     "test": "gulp test",
     "test:watch": "gulp watch:test",
     "build": "gulp",
