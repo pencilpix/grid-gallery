@@ -37,8 +37,22 @@
 
 
 
-    get itemWidth () {
+    get itemWidth() {
       return this.element.querySelector('.grid-gallery__item').offsetWidth;
+    }
+
+
+    get maxItemsPerRow() {
+      let containerWidth = this.element.offsetWidth;
+      return Math.floor(containerWidth / this.itemWidth);
+    }
+
+
+    get remainSpace() {
+      let containerWidth = this.element.offsetWidth;
+      let itemsWidth = this.maxItemsPerRow * this.itemWidth
+
+      return Math.floor((containerWidth - itemsWidth) / 2);
     }
 
 

@@ -91,6 +91,14 @@ describe('GridGallery', () => {
       });
 
       expect(gridInstance.itemWidth).toEqual(300);
+    });
+
+    it(`should have a getter max number of items per row and space`, () => {
+      container.style.width = '700px';
+      gridInstance = new GridGallery(container);
+
+      expect(gridInstance.maxItemsPerRow).toBe(3);
+      expect(gridInstance.remainSpace).toBe(50);
     })
   });
 
