@@ -31,7 +31,17 @@
 
   class GridGallery {
     constructor( element, options ) {
-      this.options = Object.assign({}, DEFAULTS, options);
+      this.options = Object.assign({}, GridGallery.DEFAULTS, options);
+    }
+
+
+    static get DEFAULTS () {
+      if(document.documentElement.dir === 'rtl')
+        DEFAULTS.direction = 'right';
+      else
+        DEFAULTS.direction = 'left';
+
+      return DEFAULTS;
     }
   }
 
