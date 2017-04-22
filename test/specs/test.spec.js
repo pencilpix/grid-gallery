@@ -55,8 +55,21 @@ describe('GridGallery', () => {
 
   afterEach(() => {
     document.body.removeChild(container);
-  })
+  });
 
+
+  describe('General Initialize', () => {
+    it('should have property direction to left', () => {
+      gridInstance = new GridGallery(container, {direction: 'left'});
+
+      expect(gridInstance.options.direction).toEqual('left');
+    });
+
+    it('should have property direction to right', () => {
+      gridInstance = new GridGallery(container, {direction: 'right'});
+      expect(gridInstance.options.direction).toEqual('right');
+    });
+  });
 
 });
 
