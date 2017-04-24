@@ -30,6 +30,7 @@
    */
   const DEFAULTS = {
     direction: 'left',
+    watch: false
   };
 
 
