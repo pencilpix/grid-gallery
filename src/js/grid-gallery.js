@@ -72,6 +72,9 @@
 
 
 
+    /**
+     * reset the rows and items positions
+     */
     update() {
       this.rows = [];
       this._updateGridRows();
@@ -170,6 +173,10 @@
 
 
 
+    /**
+     * trigger update after period of time since last
+     * window resize.
+     */
     _resizeHandler() {
       let start = Date.now();
       clearTimeout(this._timeout);
@@ -181,6 +188,15 @@
     }
 
 
+
+    /**
+     * watch the DOM if any item inserted inside
+     * grid container then updates the position
+     * where needed.
+     *
+     * @param {Function}  callback  method responsible for updating positions.
+     * @return {Object}  object of watcher type and handler
+     */
     _watch(callback) {
       let _this = this;
       let MutationObserver = window.MutationObserver ||
