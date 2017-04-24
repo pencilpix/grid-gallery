@@ -59,7 +59,7 @@
 
 
     init() {
-      this.updateGridRows();
+      this._updateGridRows();
       this.updatePositions();
 
 
@@ -74,7 +74,7 @@
 
     update() {
       this.rows = [];
-      this.updateGridRows();
+      this._updateGridRows();
       this.updatePositions();
     }
 
@@ -84,7 +84,7 @@
      * get rows of the grid depending on current
      * container children and it's order
      */
-    updateGridRows() {
+    _updateGridRows() {
 
       [...this.element.children].forEach((item, i) => {
         let index = i % this.maxItemsPerRow;
