@@ -79,6 +79,7 @@
      * container children and it's order
      */
     updateGridRows() {
+
       [...this.element.children].forEach((item, i) => {
         let index = i % this.maxItemsPerRow;
         let position;
@@ -193,7 +194,12 @@
      */
     get maxItemsPerRow() {
       let containerWidth = this.element.offsetWidth;
-      return Math.floor(containerWidth / this.itemWidth);
+      let count = Math.floor(containerWidth / this.itemWidth);
+
+      if(count > 0)
+        return count;
+      else
+        return 1;
     }
 
 
