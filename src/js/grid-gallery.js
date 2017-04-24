@@ -51,6 +51,7 @@
       this._timeout = null;
       this._delay = 300;
       this._boundResizeHandler = this._resizeHandler.bind(this);
+      this._watcher = null;
 
       this.init();
     }
@@ -63,6 +64,10 @@
 
 
       window.addEventListener('resize', this._boundResizeHandler);
+
+      if(this.options.watch) {
+        this._watch(this.update);
+      }
     }
 
 
@@ -173,6 +178,42 @@
         if(this.itemWidth)
           this.update();
       }, this._delay);
+    }
+
+
+    _watch(callback) {
+      let _this = this;
+      let MutationObserver = window.MutationObserver ||
+                             window.WebkitMutationObserver;
+
+      function watchUsingObserver() {
+        let observer = new MutationObserver((mutations) => {
+          mutations.forEach(mutation => {
+            callback.call(_this);
+          });
+        });
+
+        let config = {childList: true};
+
+        observer.observe(_this.element, config);
+        return {type: 'event', handler: observer};
+      }
+
+
+      function watchUsingEvents() {
+        let boundCallback = callback.bind(_this);
+
+        document.body.addEventListener('DOMNodeInserted', boundCallback);
+        document.body.addEventListener('DOMNodeRemoved', boundCallback);
+
+        return {type: 'event', handler: boundCallback}
+      }
+
+
+      if(MutationObserver)
+        this._watcher = watchUsingObserver();
+      else
+        this._watcher = watchUsingEvents();
     }
 
 
