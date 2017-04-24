@@ -93,7 +93,7 @@
           this.rows.push([]);
         }
 
-        position = this.getItemPosition(index);
+        position = this._getItemPosition(index);
         this.rows[this.lastIndex].push({item: item, position: position});
       });
     }
@@ -106,7 +106,7 @@
      * @param {Number}  index  the number reperesent index in current row
      * @return {Object}
      */
-    getItemPosition(index) {
+    _getItemPosition(index) {
       let direction = this.options.direction;
       let lastIndex = this.lastIndex;
       let rowIs     = lastIndex === 0 ? 'first_row' : 'any_row';
