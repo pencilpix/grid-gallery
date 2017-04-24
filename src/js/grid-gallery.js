@@ -60,7 +60,7 @@
 
     init() {
       this._updateGridRows();
-      this.updatePositions();
+      this._updatePositions();
 
 
       window.addEventListener('resize', this._boundResizeHandler);
@@ -75,7 +75,7 @@
     update() {
       this.rows = [];
       this._updateGridRows();
-      this.updatePositions();
+      this._updatePositions();
     }
 
 
@@ -152,7 +152,7 @@
      * depending on position iformation
      * stored in item object of in rows property
      */
-    updatePositions() {
+    _updatePositions() {
       let direction = this.options.direction;
       if(this.lastIndex === -1)
         return;
