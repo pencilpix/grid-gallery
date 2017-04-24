@@ -164,6 +164,13 @@ describe('GridGallery', () => {
       }, gridInstance._delay + 100);
     });
 
+    it('should set container height to the biggest position item + it\'s height', () => {
+      container.style.width = '700px';
+      gridInstance = new GridGallery(container);
+
+      // height calculated manually
+      expect(container.offsetHeight).toEqual(840);
+    });
   });
 });
 

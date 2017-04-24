@@ -152,8 +152,11 @@
 
       this.rows.forEach(row => {
         row.forEach(rowItem => {
+          let itemBottom = rowItem.position.top + rowItem.item.offsetHeight;
           rowItem.item.style.top = rowItem.position.top + 'px';
           rowItem.item.style[direction] = rowItem.position[direction] + 'px';
+          if(this.element.offsetHeight < itemBottom)
+              this.element.style.height = itemBottom + 'px';
         });
       });
     }
