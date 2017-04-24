@@ -25,6 +25,11 @@ JavaScript grid gallery to produce un-equal cols grid
 the container must have `grid-gallery` class and the grid items `grid-gallery__item`
 
 ```html
+  <link rel="stylesheet" href="path/to/grid-gallery/dist/css/grid-gallery.min.css">
+
+
+
+
   <!-- grid container -->
   <div id="container" class="grid-gallery">
     <!-- grid item -->
@@ -44,6 +49,10 @@ the container must have `grid-gallery` class and the grid items `grid-gallery__i
     ....
 
   </div>
+
+
+
+  <script src="path/to/grid-gallery/dist/js/grid-gallery.min.js"></script>
 ```
 
 
