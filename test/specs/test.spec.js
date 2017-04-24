@@ -171,6 +171,38 @@ describe('GridGallery', () => {
       // height calculated manually
       expect(container.offsetHeight).toEqual(840);
     });
+
+    it('should watch the container if any item inserted after plugin initialized', (done) => {
+      container.style.width = '700px';
+      gridInstance = new GridGallery(container, {watch: true});
+
+      let div = insertElement(container, 'div', 'grid-gallery__item',{
+          height: '220px',
+          width: '200px'
+        });
+
+      setTimeout(() => {
+        expect(div.style.top).toEqual('590px');
+        expect(div.style.left).toEqual('450px');
+        done();
+      }, 50);
+    });
+
+    it('should not watch the container if any item inserted after plugin initialized', (done) => {
+      container.style.width = '700px';
+      gridInstance = new GridGallery(container, {watch: false});
+
+      let div = insertElement(container, 'div', 'grid-gallery__item',{
+          height: '220px',
+          width: '200px'
+        });
+
+      setTimeout(() => {
+        expect(div.style.top).toEqual('');
+        expect(div.style.left).toEqual('');
+        done();
+      }, 50);
+    });
   });
 });
 
