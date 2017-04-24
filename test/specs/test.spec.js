@@ -188,6 +188,30 @@ describe('GridGallery', () => {
       }, 50);
     });
 
+    it('should watch the container if any item inserted and no mutation observer', (done) => {
+      let tempMutation = window.MutationObserver,
+          tempWebkitMutationObserver = window.WebkitMutationObserver;
+
+      window.MutationObserver = window.WebKitMutationObserver = undefined;
+
+      container.style.width = '700px';
+      gridInstance = new GridGallery(container, {watch: true});
+
+      let div = insertElement(container, 'div', 'grid-gallery__item',{
+          height: '220px',
+          width: '200px'
+        });
+
+      setTimeout(() => {
+        expect(gridInstance._watcher.type).toBe('event');
+        expect(div.style.top).toEqual('590px');
+        expect(div.style.left).toEqual('450px');
+        done();
+        window.MutationObserver = tempMutation;
+        window.tempWebkitMutationObserver = tempWebkitMutationObserver;
+      }, 50);
+    });
+
     it('should not watch the container if any item inserted after plugin initialized', (done) => {
       container.style.width = '700px';
       gridInstance = new GridGallery(container, {watch: false});
