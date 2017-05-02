@@ -178,7 +178,6 @@
      * window resize.
      */
     _resizeHandler() {
-      let start = Date.now();
       clearTimeout(this._timeout);
 
       this._timeout = setTimeout(() => {
