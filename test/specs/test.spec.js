@@ -182,6 +182,7 @@ describe('GridGallery', () => {
         });
 
       setTimeout(() => {
+        expect(gridInstance._watcher.type).toBe('observer');
         expect(div.style.top).toEqual('590px');
         expect(div.style.left).toEqual('450px');
         done();

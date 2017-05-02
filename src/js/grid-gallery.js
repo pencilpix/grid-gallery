@@ -212,7 +212,7 @@
         let config = {childList: true};
 
         observer.observe(_this.element, config);
-        return {type: 'event', handler: observer};
+        return {type: 'observer', handler: observer};
       }
 
 
