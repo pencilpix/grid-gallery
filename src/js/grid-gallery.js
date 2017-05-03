@@ -80,8 +80,8 @@ export default class GridGallery {
     window.removeEventListener('resize', this._boundResizeHandler);
 
     if(this._watcher && this._watcher.type === 'event') {
-      window.removeEventListener('DOMNodeInserted', this._watcher.handler);
-      window.removeEventListener('DOMNodeRemoved', this._watcher.handler);
+      document.body.removeEventListener('DOMNodeInserted', this._watcher.handler);
+      document.body.removeEventListener('DOMNodeRemoved', this._watcher.handler);
     } else if(this._watcher && this._watcher.type === 'observer') {
       this._watcher.handler.disconnect();
     }
