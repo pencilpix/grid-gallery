@@ -228,6 +228,36 @@ describe('GridGallery', () => {
         done();
       }, 50);
     });
+
+    it('should destroy the instance', (done) => {
+      let event = new CustomEvent('Event');
+      event.initEvent('resize', true, true);
+      container.style.width = '700px';
+      gridInstance = new GridGallery(container, {watch: true});
+
+      spyOn(gridInstance, 'update');
+
+      gridInstance.destroy();
+
+      let div = insertElement(container, 'div', 'grid-gallery__item',{
+          height: '220px',
+          width: '200px'
+        });
+
+      expect(gridInstance.rows).toEqual([]);
+      expect(document.querySelectorAll('.grid-gallery__item')[1].style.left).toEqual('', 'position is not clear');
+      expect(gridInstance.element).toEqual(null);
+      expect(container.style.height).toEqual('');
+
+      window.dispatchEvent(event);
+
+      setTimeout(() => {
+        expect(div.style.top).toEqual('', 'added element top pos');
+        expect(div.style.left).toEqual('', 'added element bottom pos');
+        expect(gridInstance.update).not.toHaveBeenCalled();
+        done();
+      }, gridInstance._delay + 100);
+    });
   });
 });
 

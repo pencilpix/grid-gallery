@@ -70,6 +70,35 @@ export default class GridGallery {
   }
 
 
+  /**
+   * unbind resize handler
+   * stop watching DOM if watch option enabled
+   * reset rows array
+   * remove element and clear it's height.
+   */
+  destroy() {
+    window.removeEventListener('resize', this._boundResizeHandler);
+
+    if(this._watcher && this._watcher.type === 'event') {
+      window.removeEventListener('DOMNodeInserted', this._watcher.handler);
+      window.removeEventListener('DOMNodeRemoved', this._watcher.handler);
+    } else if(this._watcher && this._watcher.type === 'observer') {
+      this._watcher.handler.disconnect();
+    }
+
+    this.rows = [];
+
+    [...this.element.children].forEach((child) => {
+      child.style.top = '';
+      child.style[this.options.direction] = '';
+    });
+
+
+    this.element.style.height = '';
+    this.element = null;
+  }
+
+
 
   /**
    * get rows of the grid depending on current
