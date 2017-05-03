@@ -55,6 +55,15 @@ export const BUILD_DEST = {
 export const BABEL_OPTIONS = {
   presets: [
     ['es2015', {modules: false}]
+  ],
+  plugins: [
+    [ "add-module-exports"],
+    ["transform-es2015-modules-umd", {
+      globals: {
+        'grid-gallery': 'GridGallery'
+      },
+      exactGlobals: true
+    }]
   ]
 }
 
