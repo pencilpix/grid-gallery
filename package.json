@@ -3,7 +3,8 @@
   "version": "1.0.1-alpha",
   "description": "un-equal columns grid",
   "private": false,
-  "main": "./dist/js/grid-gallery.min.js",
+  "main": "./dist/js/grid-gallery.js",
+  "module": "./src/js/grid-gallery.js",
   "style": "./dist/css/grid-gallery.min.css",
   "scripts": {
     "start": "gulp serve",

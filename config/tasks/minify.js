@@ -13,11 +13,11 @@ export const minify = (() => {
         end_comment: 'end-strip-code'
       }))
       .pipe(gulp.dest(BUILD_DEST.js))
-      .pipe($.uglify())
-      .pipe($.rename((path) => {
-        path.basename += '.min';
-        path.extname = '.js';
-      }))
+      // .pipe($.uglify())
+      // .pipe($.rename((path) => {
+        // path.basename += '.min';
+        // path.extname = '.js';
+      // }))
       .pipe(gulp.dest(BUILD_DEST.js));
   });
 
