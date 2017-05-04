@@ -20,16 +20,15 @@ JavaScript grid gallery to produce un-equal cols grid
     $ bower install --save grid-gallery
     ```
 
+-------------------------------------------------------------------------------
 ## usage:
 
 the container must have `grid-gallery` class and the grid items `grid-gallery__item`
 
+### in browser
 ```html
   <link rel="stylesheet" href="path/to/grid-gallery/dist/css/grid-gallery.min.css">
-
-
-
-
+  ...
   <!-- grid container -->
   <div id="container" class="grid-gallery">
     <!-- grid item -->
@@ -45,27 +44,61 @@ the container must have `grid-gallery` class and the grid items `grid-gallery__i
         <!-- some content -->
       </div>
     </div>
-
     ....
-
   </div>
 
-
-
-  <script src="path/to/grid-gallery/dist/js/grid-gallery.min.js"></script>
+  ...
+  <script src="path/to/grid-gallery/dist/js/grid-gallery.js"></script>
 ```
 
+#### CJs
+```js
+  var GridGallery = require('grid-gallery');
+  var options = { ... }
+
+  var myGrid = new GridGallery(document.getElementById('container'), options);
+```
+
+#### ES6
+```js
+  import GridGallery from 'grid-gallery';
+
+  var options = { ... }
+  var myGrid = new GridGallery(document.getElementById('container'), options);
+```
+
+#### AMD
+```js
+    require(['grid-gallery'], (GridGallery) => {
+      var options = { ... }
+      var myGrid = new GridGallery(document.getElementById('container'), options);
+    })
+```
+
+------------------------------------------------------------------------------
+## options:
 
 ```js
 var options = {
   direction: 'right', // left is default for ltr and right for rtl.
-
-  watch: true         // false by default, and if set to true
+  watch: true,        // false by default, and if set to true
                       // it will watch DOM changes
                       // and update positions if grid item inserted/removed
+
+  // callbacks
+  onInitialize:  () => { ... }, // called before init.
+  onInitialized: () => { ... }, // called after init.
+  onUpdate:      () => { ... }, // called before update after 'resize' event as example.
+  onUpdated:     () => { ... }, // called after updated.
+  onPosition:    () => { ... }, // called before setting position of grid items
+  onPositioned:  () => { ... }, // called after positioning the grid items
 }
 ```
 
+## methods
+
+1. `update` it will reposition the grid items
+2. `destroy` it will clear the positions, reset all options and remove event handlers.
 
 
 
