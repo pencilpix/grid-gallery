@@ -258,6 +258,40 @@ describe('GridGallery', () => {
         done();
       }, gridInstance._delay + 100);
     });
+
+
+    it('should call  callbacks functions', (done) => {
+      let initialize, initialized, update, updated, position, positioned;
+      let options;
+      let event = new CustomEvent('resize');
+
+      initialize = initialized = update = updated = position = positioned = 0;
+      options = {
+        watch: true,
+        onInitialize:  () => initialize++,
+        onInitialized: () => initialized++,
+        onUpdate:      () => update++,
+        onUpdated:     () => updated++,
+        onPosition:    () => position++,
+        onPositioned:  () => positioned++
+      }
+
+      gridInstance = new GridGallery(container, options);
+
+      window.dispatchEvent(event);
+
+      setTimeout(() => {
+        expect(initialize).toEqual(1, 'should call onInitialize');
+        expect(initialized).toEqual(1, 'should call onInitialized');
+        expect(update).toEqual(1, 'should call onupdate');
+        expect(updated).toEqual(1, 'should call onupdated');
+
+        // one after init and one after resize
+        expect(position).toEqual(2, 'should call onposition');
+        expect(positioned).toEqual(2, 'should call onpositioned');
+        done();
+      }, 400);
+    })
   });
 });
 

@@ -18,7 +18,15 @@ const VERSION = '1.0.1';
  */
 const DEFAULTS = {
   direction: 'left',
-  watch: false
+  watch: false,
+
+  // callbacks
+  onInitialize:  null,
+  onInitialized: null,
+  onUpdate:      null,
+  onUpdated:     null,
+  onPosition:    null,
+  onPositioned:  null
 };
 
 
@@ -47,6 +55,9 @@ export default class GridGallery {
 
 
   init() {
+    if(this.options.onInitialize && typeof this.options.onInitialize === 'function')
+      this.options.onInitialize.call();
+
     this._updateGridRows();
     this._updatePositions();
 
@@ -56,6 +67,9 @@ export default class GridGallery {
     if(this.options.watch) {
       this._watch(this.update);
     }
+
+    if(this.options.onInitialized && typeof this.options.onInitialized === 'function')
+      this.options.onInitialized.call();
   }
 
 
@@ -64,9 +78,15 @@ export default class GridGallery {
    * reset the rows and items positions
    */
   update() {
+    if(this.options.onUpdate && typeof this.options.onUpdate === 'function')
+      this.options.onUpdate.call();
+
     this.rows = [];
     this._updateGridRows();
     this._updatePositions();
+
+    if(this.options.onUpdated && typeof this.options.onUpdated === 'function')
+      this.options.onUpdated.call();
   }
 
 
@@ -177,6 +197,9 @@ export default class GridGallery {
     if(this.lastIndex === -1)
       return;
 
+    if(this.options.onPosition && typeof this.options.onPosition === 'function')
+      this.options.onPosition.call();
+
     this.rows.forEach(row => {
       row.forEach(rowItem => {
         let itemBottom = rowItem.position.top + rowItem.item.offsetHeight;
@@ -186,6 +209,9 @@ export default class GridGallery {
             this.element.style.height = itemBottom + 'px';
       });
     });
+
+    if(this.options.onPositioned && typeof this.options.onPositioned === 'function')
+      this.options.onPositioned.call();
   }
 
 
