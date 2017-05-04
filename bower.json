@@ -1,0 +1,27 @@
+{
+  "name": "grid-gallery",
+  "description": "generates un-equal columns grid",
+  "main": [
+    "./dist/js/grid-gallery.js",
+    "./dist/css/grid-gallery.min.css"
+  ],
+  "authors": [
+    "Mohamed Hassan"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "grid",
+    "un-equal",
+    "unequal",
+    "cols",
+    "columns"
+  ],
+  "homepage": "https://github.com/pencilpix/grid-gallery",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
