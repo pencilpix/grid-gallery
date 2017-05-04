@@ -113,7 +113,7 @@ export default class GridGallery {
       child.style[this.options.direction] = '';
     });
 
-
+    this.options = null;
     this.element.style.height = '';
     this.element = null;
   }
