@@ -172,6 +172,20 @@ describe('GridGallery', () => {
       expect(container.offsetHeight).toEqual(840);
     });
 
+    it('should set container height to the largest height after removing items', (done) => {
+      container.style.width = '700px';
+      gridInstance = new GridGallery(container, { watch: true });
+
+      let lastItem = container.querySelectorAll('.grid-gallery__item')[10];
+      container.removeChild(lastItem);
+
+      setTimeout(() => {
+        expect(container.offsetHeight).toEqual(810);
+        done();
+      });
+
+    });
+
     it('should watch the container if any item inserted after plugin initialized', (done) => {
       container.style.width = '700px';
       gridInstance = new GridGallery(container, {watch: true});

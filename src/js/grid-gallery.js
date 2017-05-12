@@ -194,6 +194,7 @@ export default class GridGallery {
    */
   _updatePositions() {
     let direction = this.options.direction;
+    let largestHeight = 0;
     if(this.lastIndex === -1)
       return;
 
@@ -205,10 +206,12 @@ export default class GridGallery {
         let itemBottom = rowItem.position.top + rowItem.item.offsetHeight;
         rowItem.item.style.top = rowItem.position.top + 'px';
         rowItem.item.style[direction] = rowItem.position[direction] + 'px';
-        if(this.element.offsetHeight < itemBottom)
-            this.element.style.height = itemBottom + 'px';
+        if(largestHeight < itemBottom)
+            largestHeight = itemBottom;
       });
     });
+
+    this.element.style.height = largestHeight + 'px';
 
     if(this.options.onPositioned && typeof this.options.onPositioned === 'function')
       this.options.onPositioned.call();
