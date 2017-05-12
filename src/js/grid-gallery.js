@@ -9,7 +9,7 @@
  *               https://github.com/pencilpix/grid-gallery/blob/master/LICENSE
  */
 
-const VERSION = '2.0.0';
+const VERSION = '2.0.1';
 
 /**
  * default options
@@ -19,6 +19,7 @@ const VERSION = '2.0.0';
 const DEFAULTS = {
   direction: 'left',
   watch: false,
+  watchDelay: 100,
 
   // callbacks
   onInitialize:  null,
@@ -48,6 +49,7 @@ export default class GridGallery {
     this._delay = 300;
     this._boundResizeHandler = this._resizeHandler.bind(this);
     this._watcher = null;
+    this._watchTimeout = null;
 
     this.init();
   }
@@ -194,6 +196,7 @@ export default class GridGallery {
    */
   _updatePositions() {
     let direction = this.options.direction;
+    let largestHeight = 0;
     if(this.lastIndex === -1)
       return;
 
@@ -205,10 +208,12 @@ export default class GridGallery {
         let itemBottom = rowItem.position.top + rowItem.item.offsetHeight;
         rowItem.item.style.top = rowItem.position.top + 'px';
         rowItem.item.style[direction] = rowItem.position[direction] + 'px';
-        if(this.element.offsetHeight < itemBottom)
-            this.element.style.height = itemBottom + 'px';
+        if(largestHeight < itemBottom)
+            largestHeight = itemBottom;
       });
     });
+
+    this.element.style.height = largestHeight + 'px';
 
     if(this.options.onPositioned && typeof this.options.onPositioned === 'function')
       this.options.onPositioned.call();
@@ -247,7 +252,11 @@ export default class GridGallery {
     function watchUsingObserver() {
       let observer = new MutationObserver((mutations) => {
         mutations.forEach(mutation => {
-          callback.call(_this);
+          clearTimeout(_this._watchTimeout);
+
+          _this._watchTimeout = setTimeout(() => {
+            callback.call(_this)
+          }, _this.options.watchDelay);
         });
       });
 
@@ -259,8 +268,17 @@ export default class GridGallery {
 
 
     function watchUsingEvents() {
-      let boundCallback = callback.bind(_this);
+      let boundCallback;
 
+      function handler() {
+        clearTimeout(this._watchTimeout);
+
+        this._watchTimeout = setTimeout(() => {
+          callback.call(this);
+        }, this.options.watchDelay);
+      }
+
+      boundCallback = handler.bind(_this);
       document.body.addEventListener('DOMNodeInserted', boundCallback);
       document.body.addEventListener('DOMNodeRemoved', boundCallback);
 

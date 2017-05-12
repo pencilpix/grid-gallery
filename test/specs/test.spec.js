@@ -172,6 +172,20 @@ describe('GridGallery', () => {
       expect(container.offsetHeight).toEqual(840);
     });
 
+    it('should set container height to the largest height after removing items', (done) => {
+      container.style.width = '700px';
+      gridInstance = new GridGallery(container, { watch: true });
+
+      let lastItem = container.querySelectorAll('.grid-gallery__item')[10];
+      container.removeChild(lastItem);
+
+      setTimeout(() => {
+        expect(container.offsetHeight).toEqual(810);
+        done();
+      }, 200);
+
+    });
+
     it('should watch the container if any item inserted after plugin initialized', (done) => {
       container.style.width = '700px';
       gridInstance = new GridGallery(container, {watch: true});
@@ -186,7 +200,23 @@ describe('GridGallery', () => {
         expect(div.style.top).toEqual('590px');
         expect(div.style.left).toEqual('450px');
         done();
-      }, 50);
+      }, 110);
+    });
+
+    it('should debounce watch if more than one insert/remove element fast', (done) => {
+      container.style.width = '700px';
+      let items = container.querySelectorAll('.grid-gallery__item');
+      let value = 0;
+      gridInstance = new GridGallery(container, {watch: true, watchDelay: 100, onUpdated: () => {value += 1}});
+
+      gridInstance.element.removeChild(items[10]);
+      gridInstance.element.removeChild(items[9]);
+
+
+      setTimeout(() => {
+        expect(value).toEqual(1);
+       done();
+      }, 110);
     });
 
     it('should watch the container if any item inserted and no mutation observer', (done) => {
@@ -210,9 +240,30 @@ describe('GridGallery', () => {
         done();
         window.MutationObserver = tempMutation;
         window.tempWebkitMutationObserver = tempWebkitMutationObserver;
-      }, 50);
+      }, 110);
     });
 
+    it('should debounce watch if more than one insert/remove element fast dom events', (done) => {
+      let tempMutation = window.MutationObserver,
+          tempWebkitMutationObserver = window.WebkitMutationObserver;
+
+      window.MutationObserver = window.WebKitMutationObserver = undefined;
+
+
+      container.style.width = '700px';
+      let items = container.querySelectorAll('.grid-gallery__item');
+      let value = 0;
+      gridInstance = new GridGallery(container, {watch: true, watchDelay: 100, onUpdated: () => {value += 1}});
+
+      gridInstance.element.removeChild(items[10]);
+      gridInstance.element.removeChild(items[9]);
+
+
+      setTimeout(() => {
+        expect(value).toEqual(1);
+       done();
+      }, 110);
+    });
     it('should not watch the container if any item inserted after plugin initialized', (done) => {
       container.style.width = '700px';
       gridInstance = new GridGallery(container, {watch: false});
@@ -226,7 +277,7 @@ describe('GridGallery', () => {
         expect(div.style.top).toEqual('');
         expect(div.style.left).toEqual('');
         done();
-      }, 50);
+      }, 100);
     });
 
     it('should destroy the instance', (done) => {

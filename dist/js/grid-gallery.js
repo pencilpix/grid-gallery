@@ -64,7 +64,7 @@
    *               https://github.com/pencilpix/grid-gallery/blob/master/LICENSE
    */
 
-  var VERSION = '2.0.0';
+  var VERSION = '2.0.1';
 
   /**
    * default options
@@ -74,6 +74,7 @@
   var DEFAULTS = {
     direction: 'left',
     watch: false,
+    watchDelay: 100,
 
     // callbacks
     onInitialize: null,
@@ -104,6 +105,7 @@
       this._delay = 300;
       this._boundResizeHandler = this._resizeHandler.bind(this);
       this._watcher = null;
+      this._watchTimeout = null;
 
       this.init();
     }
@@ -219,9 +221,8 @@
     }, {
       key: '_updatePositions',
       value: function _updatePositions() {
-        var _this4 = this;
-
         var direction = this.options.direction;
+        var largestHeight = 0;
         if (this.lastIndex === -1) return;
 
         if (this.options.onPosition && typeof this.options.onPosition === 'function') this.options.onPosition.call();
@@ -231,21 +232,23 @@
             var itemBottom = rowItem.position.top + rowItem.item.offsetHeight;
             rowItem.item.style.top = rowItem.position.top + 'px';
             rowItem.item.style[direction] = rowItem.position[direction] + 'px';
-            if (_this4.element.offsetHeight < itemBottom) _this4.element.style.height = itemBottom + 'px';
+            if (largestHeight < itemBottom) largestHeight = itemBottom;
           });
         });
+
+        this.element.style.height = largestHeight + 'px';
 
         if (this.options.onPositioned && typeof this.options.onPositioned === 'function') this.options.onPositioned.call();
       }
     }, {
       key: '_resizeHandler',
       value: function _resizeHandler() {
-        var _this5 = this;
+        var _this4 = this;
 
         clearTimeout(this._timeout);
 
         this._timeout = setTimeout(function () {
-          if (_this5.itemWidth) _this5.update();
+          if (_this4.itemWidth) _this4.update();
         }, this._delay);
       }
     }, {
@@ -257,7 +260,11 @@
         function watchUsingObserver() {
           var observer = new MutationObserver(function (mutations) {
             mutations.forEach(function (mutation) {
-              callback.call(_this);
+              clearTimeout(_this._watchTimeout);
+
+              _this._watchTimeout = setTimeout(function () {
+                callback.call(_this);
+              }, _this.options.watchDelay);
             });
           });
 
@@ -268,8 +275,19 @@
         }
 
         function watchUsingEvents() {
-          var boundCallback = callback.bind(_this);
+          var boundCallback = void 0;
 
+          function handler() {
+            var _this5 = this;
+
+            clearTimeout(this._watchTimeout);
+
+            this._watchTimeout = setTimeout(function () {
+              callback.call(_this5);
+            }, this.options.watchDelay);
+          }
+
+          boundCallback = handler.bind(_this);
           document.body.addEventListener('DOMNodeInserted', boundCallback);
           document.body.addEventListener('DOMNodeRemoved', boundCallback);
 
