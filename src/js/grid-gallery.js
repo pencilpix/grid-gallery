@@ -19,6 +19,7 @@ const VERSION = '2.0.0';
 const DEFAULTS = {
   direction: 'left',
   watch: false,
+  watchDelay: 100,
 
   // callbacks
   onInitialize:  null,
@@ -48,6 +49,7 @@ export default class GridGallery {
     this._delay = 300;
     this._boundResizeHandler = this._resizeHandler.bind(this);
     this._watcher = null;
+    this._watchTimeout = null;
 
     this.init();
   }
@@ -250,7 +252,11 @@ export default class GridGallery {
     function watchUsingObserver() {
       let observer = new MutationObserver((mutations) => {
         mutations.forEach(mutation => {
-          callback.call(_this);
+          clearTimeout(_this._watchTimeout);
+
+          _this._watchTimeout = setTimeout(() => {
+            callback.call(_this)
+          }, _this.options.watchDelay);
         });
       });
 
@@ -262,8 +268,17 @@ export default class GridGallery {
 
 
     function watchUsingEvents() {
-      let boundCallback = callback.bind(_this);
+      let boundCallback;
 
+      function handler() {
+        clearTimeout(this._watchTimeout);
+
+        this._watchTimeout = setTimeout(() => {
+          callback.call(this);
+        }, this.options.watchDelay);
+      }
+
+      boundCallback = handler.bind(_this);
       document.body.addEventListener('DOMNodeInserted', boundCallback);
       document.body.addEventListener('DOMNodeRemoved', boundCallback);
 
